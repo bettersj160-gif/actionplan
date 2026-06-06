@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>팀인크레더블 Action Plan</title>
+<script src="https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-app-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-database-compat.js"></script>
 <style>
-:root{--bg:#fff;--bg2:#f5f5f3;--bg3:#efefed;--text:#1a1a1a;--text2:#6b6b6b;--text3:#9a9a9a;--border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.22);--r:8px;--rl:12px;--teal:#1D9E75;--teal-bg:#E1F5EE;--teal-t:#085041;--blue:#378ADD;--blue-bg:#E6F1FB;--blue-t:#0C447C;--red:#D85A30;--red-bg:#FAECE7;--red-t:#712B13;}
+:root{--bg:#fff;--bg2:#f5f5f3;--text:#1a1a1a;--text2:#6b6b6b;--text3:#9a9a9a;--border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.22);--r:8px;--rl:12px;--teal:#1D9E75;--teal-bg:#E1F5EE;--teal-t:#085041;--blue:#378ADD;--blue-bg:#E6F1FB;--blue-t:#0C447C;--red:#D85A30;--red-bg:#FAECE7;--red-t:#712B13;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;}
 .screen{display:none;}.screen.active{display:block;}
@@ -111,11 +113,11 @@ input[type=range]{flex:1;accent-color:var(--text);}
 .pp{display:block;padding:12px 0;border-bottom:0.5px solid var(--border);}
 .pp:last-child{border-bottom:none;}
 .btn-sm{background:var(--text);color:var(--bg);border:none;border-radius:var(--r);padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}
+.loading{text-align:center;padding:2rem;font-size:13px;color:var(--text3);}
 </style>
 </head>
 <body>
 
-<!-- 직원 모바일 -->
 <div class="screen" id="sc-emp">
 <div class="hd"><div class="hd-in"><span class="hd-t">팀인크레더블 Action Plan</span><span style="font-size:11px;padding:3px 10px;border-radius:99px;background:var(--blue-bg);color:var(--blue-t);font-weight:600;">사원·주임·대리급</span></div></div>
 <div class="wrap">
@@ -135,19 +137,18 @@ input[type=range]{flex:1;accent-color:var(--text);}
   </div>
   <div id="emp-fu" style="display:none;">
     <div id="fu-code-step"><div style="padding:1rem 0 1.5rem;"><p class="sl">팔로우업</p><p class="st">내 고유 코드를 입력해 주세요</p><p class="ss">교육 당일 발급받은 6자리 코드를 입력하세요.</p></div><input type="text" id="fu-inp" placeholder="예) A3K9PQ" maxlength="6" style="font-size:22px;letter-spacing:6px;text-align:center;text-transform:uppercase;font-family:monospace;"><p class="err" id="fu-err">코드를 찾을 수 없습니다.</p><button class="btn" onclick="lookupFU()" style="margin-top:4px;">확인</button><button class="btn btn-o" onclick="backMode()">이전</button></div>
-    <div id="fu-score-step" style="display:none;"><div class="sum-box" style="margin-bottom:1.25rem;"><p class="sum-l">내 Action Plan</p><p class="sum-t" id="fu-sum"></p></div><label class="fl">점수 입력 시점</label><select id="fu-period" onchange="renderCtx()" style="margin-bottom:1rem;"><option value="">선택해 주세요</option><option value="1m">1개월 후</option><option value="3m">3개월 후</option><option value="6m">6개월 후</option></select><label class="fl">개인 Action Plan 실천 점수 (1~10)</label><p class="hint" style="margin-bottom:10px;">내가 정한 행동을 얼마나 실천하고 있는가?</p><div class="rw"><input type="range" min="1" max="10" value="5" id="sp" step="1" oninput="document.getElementById('spv').textContent=this.value;renderCtx()"><span class="rv" id="spv">5</span></div><label class="fl">공동 협업 룰 실천 점수 (1~10)</label><p class="hint" style="margin-bottom:10px;">우리 직급이 공동 룰을 얼마나 지키고 있는가?</p><div class="rw"><input type="range" min="1" max="10" value="5" id="sg" step="1" oninput="document.getElementById('sgv').textContent=this.value;renderCtx()"><span class="rv" id="sgv">5</span></div><div id="ctx-area" style="display:none;"><div id="ctx-p" class="cb sm"><p class="ct2 sm" id="ctx-p-tag"></p><textarea id="ctx-p-ta" style="background:transparent;border:none;padding:0;min-height:80px;font-size:13px;margin-bottom:0;"></textarea></div><div id="ctx-g" class="cb sm" style="margin-top:10px;"><p class="ct2 sm" id="ctx-g-tag"></p><textarea id="ctx-g-ta" style="background:transparent;border:none;padding:0;min-height:80px;font-size:13px;margin-bottom:0;"></textarea></div></div><button class="btn" onclick="submitFU()" style="margin-top:1rem;">제출하기</button><div id="fu-done" style="display:none;text-align:center;padding:2rem 0;"><div style="font-size:40px;margin-bottom:1rem;">✅</div><p style="font-size:16px;font-weight:600;">점수가 등록됐습니다</p><p style="font-size:13px;color:var(--text2);margin-top:8px;line-height:1.6;">기록이 대시보드에 반영됩니다.<br>다음 팔로우업 때 또 돌아봐 주세요.</p></div></div>
+    <div id="fu-score-step" style="display:none;"><div class="sum-box" style="margin-bottom:1.25rem;"><p class="sum-l">내 Action Plan</p><p class="sum-t" id="fu-sum"></p></div><label class="fl">점수 입력 시점</label><select id="fu-period" onchange="renderCtx()" style="margin-bottom:1rem;"><option value="">선택해 주세요</option><option value="1m">1개월 후</option><option value="3m">3개월 후</option><option value="6m">6개월 후</option></select><label class="fl">개인 Action Plan 실천 점수 (1~10)</label><p class="hint" style="margin-bottom:10px;">내가 정한 행동을 얼마나 실천하고 있는가?</p><div class="rw"><input type="range" min="1" max="10" value="5" id="sp" step="1" oninput="document.getElementById('spv').textContent=this.value;renderCtx()"><span class="rv" id="spv">5</span></div><label class="fl">공동 협업 룰 실천 점수 (1~10)</label><p class="hint" style="margin-bottom:10px;">우리 직급이 공동 룰을 얼마나 지키고 있는가?</p><div class="rw"><input type="range" min="1" max="10" value="5" id="sg" step="1" oninput="document.getElementById('sgv').textContent=this.value;renderCtx()"><span class="rv" id="sgv">5</span></div><div id="ctx-area" style="display:none;"><div id="ctx-p" class="cb sm"><p class="ct2 sm" id="ctx-p-tag"></p><textarea id="ctx-p-ta" style="background:transparent;border:none;padding:0;min-height:80px;font-size:13px;margin-bottom:0;"></textarea></div><div id="ctx-g" class="cb sm" style="margin-top:10px;"><p class="ct2 sm" id="ctx-g-tag"></p><textarea id="ctx-g-ta" style="background:transparent;border:none;padding:0;min-height:80px;font-size:13px;margin-bottom:0;"></textarea></div></div><button class="btn" onclick="submitFU()" style="margin-top:1rem;">제출하기</button><div id="fu-done" style="display:none;text-align:center;padding:2rem 0;"><div style="font-size:40px;margin-bottom:1rem;">✅</div><p style="font-size:16px;font-weight:600;">점수가 등록됐습니다</p></div></div>
   </div>
 </div>
 </div>
 
-<!-- 간부 대시보드 -->
 <div class="screen" id="sc-admin">
 <div class="hd"><div class="hd-in"><div><p class="hd-t">사원·주임·대리급 대시보드</p><p style="font-size:11px;color:var(--text2);margin-top:1px;">간부용 · 팀인크레더블 Action Plan</p></div><button onclick="loadAdmin()" style="background:transparent;border:0.5px solid var(--border2);border-radius:var(--r);padding:7px 12px;font-size:12px;cursor:pointer;font-family:inherit;color:var(--text2);">새로고침</button></div></div>
 <div class="wrap-w">
   <div class="ed"><span style="width:8px;height:8px;border-radius:50%;background:var(--teal);display:inline-block;flex-shrink:0;"></span><span id="admin-info" style="font-size:13px;">데이터를 불러오는 중...</span></div>
   <div class="mg"><div class="mc"><p class="mn" id="a-total">0</p><p class="ml">Action Plan 제출</p></div><div class="mc"><p class="mn" id="a-teams">0</p><p class="ml">참여 팀</p></div></div>
   <div class="rb"><div class="rh"><span style="font-size:15px;">👤</span><span style="font-size:12px;font-weight:600;color:var(--text2);">교육 산출물 ①</span><span id="a-kw-cnt" style="font-size:12px;color:var(--text3);margin-left:auto;"></span></div><div class="rbd"><p class="ct">개인 Action Plan 핵심 키워드</p><p class="cs">직원 개개인이 스스로 바꾸겠다고 한 행동의 공통 패턴</p><div class="kw-wrap" id="a-kw"><span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span></div></div></div>
-  <div class="rb"><div class="rh"><span style="font-size:15px;">👥</span><span style="font-size:12px;font-weight:600;color:var(--text2);">교육 산출물 ②</span><span id="a-rule-cnt" style="font-size:12px;color:var(--text3);margin-left:auto;"></span></div><div class="rbd"><p class="ct">우리 직급 공동 협업 룰</p><p class="cs">팀 토의 후 직급 전체가 함께 지키기로 한 소통 기준</p><div id="a-rules"><span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span></div><div style="border-top:0.5px solid var(--border);margin-top:14px;padding-top:14px;"><p style="font-size:12px;color:var(--text2);margin-bottom:10px;">공동 룰 등록 (대표자용)</p><input type="text" id="r1" placeholder="공동 룰 1"><input type="text" id="r2" placeholder="공동 룰 2"><input type="text" id="r3" placeholder="공동 룰 3"><button class="btn-sm" onclick="saveRules()">등록하기</button><p class="ok" id="rule-ok">✓ 공동 룰이 등록됐습니다.</p></div></div></div>
+  <div class="rb"><div class="rh"><span style="font-size:15px;">👥</span><span style="font-size:12px;font-weight:600;color:var(--text2);">교육 산출물 ②</span><span id="a-rule-cnt" style="font-size:12px;color:var(--text3);margin-left:auto;"></span></div><div class="rbd"><p class="ct">우리 직급 공동 협업 룰</p><p class="cs">함께 지키기로 한 소통 기준</p><div id="a-rules"><span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span></div><div style="border-top:0.5px solid var(--border);margin-top:14px;padding-top:14px;"><p style="font-size:12px;color:var(--text2);margin-bottom:10px;">공동 룰 등록 (대표자용)</p><input type="text" id="r1" placeholder="공동 룰 1"><input type="text" id="r2" placeholder="공동 룰 2"><input type="text" id="r3" placeholder="공동 룰 3"><button class="btn-sm" onclick="saveRules()">등록하기</button><p class="ok" id="rule-ok">✓ 공동 룰이 등록됐습니다.</p></div></div></div>
   <div class="card"><p class="ct">소통·협업에서 어려워하는 것</p><p class="cs">질문·확인·공유 중 현업에서 가장 부족하다고 느낀 영역 분포</p><div id="a-bars"><span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span></div><div class="ins" id="a-insight" style="display:none;"><p class="ins-t">💡 조직 시사점</p><div id="a-insight-txt"></div></div></div>
   <div class="card"><p class="ct">실천 점수 변화 추이</p><p class="cs">팔로우업 시점별 평균 점수 (1~10점)</p><div id="a-scores"><span style="font-size:13px;color:var(--text3);">아직 팔로우업 점수가 없습니다</span></div></div>
   <div class="card"><p class="ct">직원들이 Action Plan 실행하면서 느낀 점</p><p class="cs">점수 변화의 이유 · 도움 요청 · 성공 요인</p><div id="a-feel"><span style="font-size:13px;color:var(--text3);">팔로우업 기록이 쌓이면 표시됩니다</span></div></div>
@@ -155,35 +156,31 @@ input[type=range]{flex:1;accent-color:var(--text);}
 </div>
 </div>
 
-<!-- 교육생 대시보드 -->
 <div class="screen" id="sc-stu">
 <div class="hd"><div class="hd-in"><div><p class="hd-t">팀인크레더블 Action Plan</p><p style="font-size:11px;color:var(--text2);margin-top:1px;">사원·주임·대리급</p></div></div></div>
 <div class="wrap">
   <div class="tab-bar"><button class="tab active" onclick="stuTab('group',this)">우리 직급 현황</button><button class="tab" onclick="stuTab('my',this)">나의 Action Plan</button></div>
   <div id="stu-group">
-    <div class="notice">🔒 이름·팀 정보 없이 익명으로 집계된 결과입니다. 우리 직급 전체가 함께 만든 내용을 확인해 보세요.</div>
+    <div class="notice">🔒 이름·팀 정보 없이 익명으로 집계된 결과입니다.</div>
     <div class="card"><p class="ct">개인 Action Plan 핵심 키워드</p><p class="cs">우리 직급이 스스로 바꾸겠다고 한 행동의 공통 패턴</p><div class="kw-wrap" id="s-kw"><span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span></div></div>
-    <div class="card"><p class="ct">우리 직급 공동 협업 룰</p><p class="cs">우리가 함께 지키기로 한 소통 기준</p><div id="s-rules"><span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span></div></div>
-    <div class="card"><p class="ct">소통·협업에서 어려워하는 것</p><p class="cs">우리 직급이 가장 부족하다고 느낀 영역</p><div id="s-bars"><span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span></div></div>
-    <div class="card"><p class="ct">우리 직급 실천 점수 평균</p><p class="cs">팔로우업 시점별 평균 점수 (1~10점)</p><div id="s-scores"><span style="font-size:13px;color:var(--text3);">아직 팔로우업 점수가 없습니다</span></div></div>
+    <div class="card"><p class="ct">우리 직급 공동 협업 룰</p><div id="s-rules"><span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span></div></div>
+    <div class="card"><p class="ct">소통·협업에서 어려워하는 것</p><div id="s-bars"><span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span></div></div>
+    <div class="card"><p class="ct">우리 직급 실천 점수 평균</p><div id="s-scores"><span style="font-size:13px;color:var(--text3);">아직 팔로우업 점수가 없습니다</span></div></div>
     <div class="card"><p class="ct">동료들이 Action Plan 실행하면서 느낀 점</p><p class="cs">무기명으로 공유된 경험입니다</p><div id="s-feel"><span style="font-size:13px;color:var(--text3);">팔로우업 기록이 쌓이면 표시됩니다</span></div></div>
   </div>
   <div id="stu-my" style="display:none;">
-    <div id="stu-code-step"><div class="notice">🔐 내 고유 코드로 접속하면 나만 볼 수 있는 Action Plan과 기록이 표시됩니다.</div><div class="card"><p class="ct" style="margin-bottom:10px;">내 고유 코드 입력</p><p class="cs" style="margin-bottom:14px;">교육 당일 발급받은 6자리 코드를 입력해 주세요.</p><input type="text" id="stu-code" placeholder="코드 입력" maxlength="6" style="font-size:22px;letter-spacing:6px;text-align:center;text-transform:uppercase;font-family:monospace;"><p class="err" id="stu-err">코드를 찾을 수 없습니다.</p><button class="btn" onclick="stuLookup()" style="margin-top:4px;">확인</button></div></div>
-    <div id="stu-result" style="display:none;"><div class="card"><p class="ct" style="margin-bottom:12px;">나의 Action Plan</p><div class="sum-box"><p class="sum-l">AI 요약</p><p class="sum-t" id="stu-sum"></p><div id="stu-kw" class="kw-wrap" style="margin-top:8px;"></div></div></div><div class="card"><p class="ct">나의 실천 점수 기록</p><p class="cs">팔로우업 시점별 내 점수 변화</p><div id="stu-scores"><p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 팔로우업 점수가 없습니다</p></div></div><div class="card"><p class="ct">내가 남긴 기록</p><p class="cs">실행하면서 느낀 점 · 도움이 된 것 · 필요한 것</p><div id="stu-ctx"><p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 기록이 없습니다</p></div></div><button class="btn btn-o" onclick="stuReset()">다른 코드로 보기</button></div>
+    <div id="stu-code-step"><div class="notice">🔐 내 고유 코드로 접속하면 나만 볼 수 있는 기록이 표시됩니다.</div><div class="card"><p class="ct" style="margin-bottom:10px;">내 고유 코드 입력</p><input type="text" id="stu-code" placeholder="코드 입력" maxlength="6" style="font-size:22px;letter-spacing:6px;text-align:center;text-transform:uppercase;font-family:monospace;"><p class="err" id="stu-err">코드를 찾을 수 없습니다.</p><button class="btn" onclick="stuLookup()" style="margin-top:4px;">확인</button></div></div>
+    <div id="stu-result" style="display:none;"><div class="card"><p class="ct" style="margin-bottom:10px;">나의 Action Plan</p><div class="sum-box"><p class="sum-l">AI 요약</p><p class="sum-t" id="stu-sum"></p><div id="stu-kw" class="kw-wrap" style="margin-top:8px;"></div></div></div><div class="card"><p class="ct">나의 실천 점수 기록</p><div id="stu-scores"><p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 팔로우업 점수가 없습니다</p></div></div><div class="card"><p class="ct">내가 남긴 기록</p><div id="stu-ctx"><p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 기록이 없습니다</p></div></div><button class="btn btn-o" onclick="stuReset()">다른 코드로 보기</button></div>
   </div>
 </div>
 </div>
 
 <script>
-const SK='ti_sub',RK='ti_rules';
-const getSubs=()=>{try{return JSON.parse(localStorage.getItem(SK)||'[]')}catch{return[]}};
-const saveSubs=l=>localStorage.setItem(SK,JSON.stringify(l));
-const getRules=()=>{try{return JSON.parse(localStorage.getItem(RK)||'[]')}catch{return[]}};
-const saveRulesDB=r=>localStorage.setItem(RK,JSON.stringify(r));
-const genCode=()=>{const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';return Array.from({length:6},()=>c[Math.floor(Math.random()*c.length)]).join('')};
+const FIREBASE_URL = 'https://actionplan-f4ca1-default-rtdb.firebaseio.com';
 
-let curStep=0,q2t='',curCode='',fuRec=null;
+function fbGet(path){return fetch(FIREBASE_URL+path+'.json').then(r=>r.json());}
+function fbSet(path,data){return fetch(FIREBASE_URL+path+'.json',{method:'PUT',body:JSON.stringify(data)}).then(r=>r.json());}
+function fbPush(path,data){return fetch(FIREBASE_URL+path+'.json',{method:'POST',body:JSON.stringify(data)}).then(r=>r.json());}
 
 function initScreen(){
   const p=new URLSearchParams(window.location.search);
@@ -193,6 +190,8 @@ function initScreen(){
   else if(m==='student'){document.getElementById('sc-stu').classList.add('active');loadStu();}
   else document.getElementById('sc-emp').classList.add('active');
 }
+
+let curStep=0,q2t='',curCode='',fuRec=null;
 
 function startNew(){document.getElementById('emp-mode').style.display='none';document.getElementById('emp-new').style.display='block';setStep(0);}
 function startFU(){document.getElementById('emp-mode').style.display='none';document.getElementById('emp-fu').style.display='block';}
@@ -209,6 +208,8 @@ function setStep(n){
   document.querySelectorAll('.step').forEach((s,i)=>s.classList.toggle('active',i===n));
   document.querySelectorAll('.pd').forEach((d,i)=>{d.classList.remove('done','on');if(i<n)d.classList.add('done');else if(i===n)d.classList.add('on');});
 }
+const genCode=()=>{const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';return Array.from({length:6},()=>c[Math.floor(Math.random()*c.length)]).join('')};
+
 async function doSubmit(){
   const q4=document.getElementById('inp-q4').value.trim();
   if(!q4){alert('내용을 입력해 주세요.');return;}
@@ -227,94 +228,111 @@ async function doSubmit(){
     const sm=t.match(/요약:\s*(.+?)(?=키워드:|$)/s);const km=t.match(/키워드:\s*(.+)/);
     if(sm)aiSum=sm[1].trim();if(km)aiKw=km[1].split(',').map(k=>k.trim());
   }catch{}
-  const code=genCode();const list=getSubs();
-  list.push({code,name,team,grade,q1,q2type:q2t,q2,q3,q4,summary:aiSum,keywords:aiKw,time:new Date().toLocaleString('ko-KR'),scores:[]});
-  saveSubs(list);
+  const code=genCode();
+  const data={code,name,team,grade,q1,q2type:q2t,q2,q3,q4,summary:aiSum,keywords:aiKw,time:new Date().toLocaleString('ko-KR'),scores:{}};
+  try{await fbSet('/submissions/'+code, data);}catch(e){alert('저장 중 오류가 발생했습니다.');}
   document.getElementById('my-code').textContent=code;
   document.getElementById('done-sum').textContent=aiSum;
   btn.disabled=false;btn.innerHTML='AI 요약 후 제출하기';
   setStep(5);
 }
-function lookupFU(){
+
+async function lookupFU(){
   const code=document.getElementById('fu-inp').value.trim().toUpperCase();
-  const found=getSubs().find(x=>x.code===code);
-  if(!found){document.getElementById('fu-err').style.display='block';return;}
-  document.getElementById('fu-err').style.display='none';
-  fuRec=found;curCode=code;
-  document.getElementById('fu-sum').textContent=found.summary||found.q3;
-  document.getElementById('fu-code-step').style.display='none';
-  document.getElementById('fu-score-step').style.display='block';
+  try{
+    const data=await fbGet('/submissions/'+code);
+    if(!data){document.getElementById('fu-err').style.display='block';return;}
+    document.getElementById('fu-err').style.display='none';
+    fuRec=data;curCode=code;
+    document.getElementById('fu-sum').textContent=data.summary||data.q3;
+    document.getElementById('fu-code-step').style.display='none';
+    document.getElementById('fu-score-step').style.display='block';
+  }catch{document.getElementById('fu-err').style.display='block';}
 }
+
 function renderCtx(){
   const period=document.getElementById('fu-period').value;if(!period||!fuRec)return;
   const sp=parseInt(document.getElementById('sp').value);const sg=parseInt(document.getElementById('sg').value);
   const pts=['1m','3m','6m'];const ci=pts.indexOf(period);
-  const prev=ci>0?(fuRec.scores||[]).find(x=>x.period===pts[ci-1]):null;
+  const scores=fuRec.scores||{};
+  const prev=ci>0?scores[pts[ci-1]]:null;
   setCtx('p',sp,prev?prev.personal:null,'개인 Action Plan');
   setCtx('g',sg,prev?prev.group:null,'공동 협업 룰');
   document.getElementById('ctx-area').style.display='block';
 }
 function setCtx(t,cur,prev,label){
   const box=document.getElementById('ctx-'+t);const tag=document.getElementById('ctx-'+t+'-tag');const ta=document.getElementById('ctx-'+t+'-ta');
-  const diff=prev!==null?cur-prev:null;box.className='cb';tag.className='ct2';
+  const diff=prev!==null&&prev!==undefined?cur-prev:null;box.className='cb';tag.className='ct2';
   if(diff===null||Math.abs(diff)<=1){box.classList.add('sm');tag.classList.add('sm');tag.textContent=label+' · 유지';ta.placeholder='유지되는 이유는? 더 올리려면 어떤 도움이 필요한가요?';}
   else if(diff>=2){box.classList.add('up');tag.classList.add('up');tag.textContent=label+' · 상승 +'+diff+'점';ta.placeholder='무엇이 도움이 됐나요?\n예) 내가 한 것 / 상사·회사가 해준 것';}
   else{box.classList.add('dn');tag.classList.add('dn');tag.textContent=label+' · 하락 '+diff+'점';ta.placeholder='실천이 어려웠던 이유는?\n예) 내가 더 필요한 것 / 상사·회사가 해주면 좋을 것';}
 }
-function submitFU(){
+
+async function submitFU(){
   const period=document.getElementById('fu-period').value;if(!period){alert('시점을 선택해 주세요.');return;}
   const sp=parseInt(document.getElementById('sp').value);const sg=parseInt(document.getElementById('sg').value);
   const ctxP=document.getElementById('ctx-p-ta').value.trim();const ctxG=document.getElementById('ctx-g-ta').value.trim();
-  const list=getSubs();const i=list.findIndex(x=>x.code===curCode);
-  if(i>-1){if(!list[i].scores)list[i].scores=[];list[i].scores=list[i].scores.filter(x=>x.period!==period);list[i].scores.push({period,personal:sp,group:sg,ctxPersonal:ctxP,ctxGroup:ctxG,date:new Date().toLocaleDateString('ko-KR')});saveSubs(list);}
-  document.querySelector('#fu-score-step .btn').style.display='none';
-  document.getElementById('fu-done').style.display='block';
+  try{
+    await fbSet('/submissions/'+curCode+'/scores/'+period,{personal:sp,group:sg,ctxPersonal:ctxP,ctxGroup:ctxG,date:new Date().toLocaleDateString('ko-KR')});
+    document.querySelector('#fu-score-step .btn').style.display='none';
+    document.getElementById('fu-done').style.display='block';
+  }catch{alert('저장 중 오류가 발생했습니다.');}
 }
-function saveRules(){
+
+async function saveRules(){
   const rules=['r1','r2','r3'].map(id=>document.getElementById(id).value.trim()).filter(Boolean);
   if(!rules.length){alert('룰을 최소 1개 입력해 주세요.');return;}
-  saveRulesDB(rules);document.getElementById('rule-ok').style.display='block';loadAdmin();
+  try{await fbSet('/rules',rules);document.getElementById('rule-ok').style.display='block';loadAdmin();}
+  catch{alert('저장 중 오류가 발생했습니다.');}
 }
-function loadAdmin(){
-  const subs=getSubs(),rules=getRules();
-  const teams=new Set(subs.map(s=>s.team));
-  document.getElementById('a-total').textContent=subs.length;
-  document.getElementById('a-teams').textContent=teams.size;
-  document.getElementById('admin-info').textContent=`교육 완료 · ${new Date().toLocaleDateString('ko-KR')} · 참여 ${subs.length}명 · ${teams.size}개 팀`;
-  document.getElementById('a-kw-cnt').textContent=`개인 ${subs.length}건`;
-  document.getElementById('a-rule-cnt').textContent=`직급 공동 ${rules.length}개`;
-  const allKw=subs.flatMap(s=>s.keywords||[]);const kwEl=document.getElementById('a-kw');
-  if(allKw.length){const f={};allKw.forEach(k=>f[k]=(f[k]||0)+1);const s=Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,10);kwEl.innerHTML=s.map(([k,n])=>`<span class="kw${n>=3?' lg':''}">${k}${n>1?` <span style="font-size:11px;opacity:.65;">${n}</span>`:''}</span>`).join('');}
-  else kwEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
-  const rEl=document.getElementById('a-rules');
-  if(rules.length)rEl.innerHTML=rules.map((r,i)=>`<div class="rr"><span class="rn">${i+1}</span><span class="rt">${r}</span></div>`).join('');
-  else rEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span>';
-  const tc={질문:0,확인:0,공유:0};subs.forEach(s=>{if(s.q2type&&tc[s.q2type]!==undefined)tc[s.q2type]++;});
-  const tot=Object.values(tc).reduce((a,b)=>a+b,0);const bEl=document.getElementById('a-bars');
-  if(tot){const cols={질문:'#EF9F27',확인:'#1D9E75',공유:'#378ADD'};
-    bEl.innerHTML=Object.entries(tc).map(([l,c])=>`<div class="br"><span class="bl">${l}</span><div class="bt"><div class="bf" style="width:${Math.round(c/tot*100)}%;background:${cols[l]};"></div></div><span class="bc">${c}명</span></div>`).join('');
-    const dom=Object.entries(tc).sort((a,b)=>b[1]-a[1])[0][0];
-    const im={질문:['직원 중 상당수가 "질문하기"를 가장 어려워하고 있습니다. 묻기 어려운 분위기가 있는지 점검이 필요합니다.','관리자가 먼저 "궁금한 거 있어요?"라고 물어보는 것만으로도 심리적 안전감을 높일 수 있습니다.','질문 문화가 없으면 업무 오류와 재작업이 반복됩니다. 질문을 장려하는 환경을 만들어 주세요.'],확인:['직원 절반이 "확인하기"를 가장 어려워하고 있습니다. 지시 후 확인 없이 진행하는 패턴이 퍼져 있을 가능성이 높습니다.','관리자가 지시 후 "이해됐어요?"를 먼저 물어보는 것만으로 확인 문화를 빠르게 정착시킬 수 있습니다.','확인 습관이 없으면 방향이 어긋난 결과물이 자주 나옵니다. 업무 시작 전 확인을 팀 루틴으로 만들어 주세요.'],공유:['직원 중 상당수가 "공유하기"를 가장 어려워하고 있습니다. 정보가 개인 단위에서 멈추는 경우가 많습니다.','공유 기준과 채널을 명확히 정해주는 것이 필요합니다. 언제 무엇을 어디에 공유할지 팀 약속을 만들어 주세요.','완료 후 공유가 아니라 진행 중 공유가 협업 속도를 높입니다. 중간 공유를 장려하는 분위기를 만들어 주세요.']};
-    document.getElementById('a-insight-txt').innerHTML=im[dom].map(t=>`<div class="ins-i"><span class="ins-d"></span><span>${t}</span></div>`).join('');
-    document.getElementById('a-insight').style.display='block';
-  }else bEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
-  renderTrend('a-scores',subs);renderFeel('a-feel',subs,true);
-  const tEl=document.getElementById('a-team-area');
-  if(subs.length){const byT={};subs.forEach(s=>{if(!byT[s.team])byT[s.team]=[];byT[s.team].push(s);});
-    const tc2={질문:'sp-q',확인:'sp-c',공유:'sp-s'};const tb={질문:'tbg-q',확인:'tbg-c',공유:'tbg-s'};
-    tEl.innerHTML=Object.entries(byT).map(([team,ms])=>{const tf={};ms.forEach(m=>{if(m.q2type)tf[m.q2type]=(tf[m.q2type]||0)+1;});const dt=Object.entries(tf).sort((a,b)=>b[1]-a[1])[0];
-      return`<div class="tb"><div class="th"><span style="font-size:14px;font-weight:600;">${team} <span style="font-size:12px;color:var(--text2);font-weight:400;">${ms.length}명</span></span>${dt?`<span class="tbg ${tb[dt[0]]}">${dt[0]} 개선 多</span>`:''}</div>${ms.map(m=>`<div class="mr"><div class="av">${m.name?m.name[0]:'?'}</div><div style="flex:1;min-width:0;"><div style="display:flex;align-items:center;flex-wrap:wrap;"><span style="font-size:13px;font-weight:600;">${m.name}</span>${m.q2type?`<span class="sp ${tc2[m.q2type]||'sp-c'}">${m.q2type}</span>`:''}<span class="cd">${m.code}</span></div><p style="font-size:12px;color:var(--text2);margin-top:2px;line-height:1.5;">${m.summary||m.q3}</p>${(m.scores||[]).length?`<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;">${m.scores.map(sc=>`<span class="sc-p">${({'1m':'1개월','3m':'3개월','6m':'6개월'}[sc.period]||sc.period)} ${sc.personal}·${sc.group}</span>`).join('')}</div>`:''}</div></div>`).join('')}</div>`;}).join('');}
-  else tEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
+
+async function loadAdmin(){
+  document.getElementById('admin-info').textContent='데이터를 불러오는 중...';
+  try{
+    const [subsData,rules]=await Promise.all([fbGet('/submissions'),fbGet('/rules')]);
+    const subs=subsData?Object.values(subsData):[];
+    const ruleList=rules||[];
+    const teams=new Set(subs.map(s=>s.team));
+    document.getElementById('a-total').textContent=subs.length;
+    document.getElementById('a-teams').textContent=teams.size;
+    document.getElementById('admin-info').textContent=`교육 완료 · ${new Date().toLocaleDateString('ko-KR')} · 참여 ${subs.length}명 · ${teams.size}개 팀`;
+    document.getElementById('a-kw-cnt').textContent=`개인 ${subs.length}건`;
+    document.getElementById('a-rule-cnt').textContent=`직급 공동 ${ruleList.length}개`;
+    const allKw=subs.flatMap(s=>s.keywords||[]);const kwEl=document.getElementById('a-kw');
+    if(allKw.length){const f={};allKw.forEach(k=>f[k]=(f[k]||0)+1);const sorted=Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,10);kwEl.innerHTML=sorted.map(([k,n])=>`<span class="kw${n>=3?' lg':''}">${k}${n>1?` <span style="font-size:11px;opacity:.65;">${n}</span>`:''}</span>`).join('');}
+    else kwEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
+    const rEl=document.getElementById('a-rules');
+    if(ruleList.length)rEl.innerHTML=ruleList.map((r,i)=>`<div class="rr"><span class="rn">${i+1}</span><span class="rt">${r}</span></div>`).join('');
+    else rEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span>';
+    const tc={질문:0,확인:0,공유:0};subs.forEach(s=>{if(s.q2type&&tc[s.q2type]!==undefined)tc[s.q2type]++;});
+    const tot=Object.values(tc).reduce((a,b)=>a+b,0);const bEl=document.getElementById('a-bars');
+    if(tot){const cols={질문:'#EF9F27',확인:'#1D9E75',공유:'#378ADD'};
+      bEl.innerHTML=Object.entries(tc).map(([l,c])=>`<div class="br"><span class="bl">${l}</span><div class="bt"><div class="bf" style="width:${Math.round(c/tot*100)}%;background:${cols[l]};"></div></div><span class="bc">${c}명</span></div>`).join('');
+      const dom=Object.entries(tc).sort((a,b)=>b[1]-a[1])[0][0];
+      const im={질문:['직원 중 상당수가 "질문하기"를 가장 어려워하고 있습니다.','관리자가 먼저 "궁금한 거 있어요?"라고 물어보는 것만으로도 심리적 안전감을 높일 수 있습니다.','질문 문화가 없으면 업무 오류와 재작업이 반복됩니다.'],확인:['직원 절반이 "확인하기"를 가장 어려워하고 있습니다.','관리자가 지시 후 "이해됐어요?"를 먼저 물어보는 것만으로 확인 문화를 빠르게 정착시킬 수 있습니다.','확인 습관이 없으면 방향이 어긋난 결과물이 자주 나옵니다.'],공유:['직원 중 상당수가 "공유하기"를 가장 어려워하고 있습니다.','공유 기준과 채널을 명확히 정해주는 것이 필요합니다.','완료 후 공유가 아니라 진행 중 공유가 협업 속도를 높입니다.']};
+      document.getElementById('a-insight-txt').innerHTML=im[dom].map(t=>`<div class="ins-i"><span class="ins-d"></span><span>${t}</span></div>`).join('');
+      document.getElementById('a-insight').style.display='block';
+    }else bEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
+    renderTrend('a-scores',subs);renderFeel('a-feel',subs,true);
+    const tEl=document.getElementById('a-team-area');
+    if(subs.length){const byT={};subs.forEach(s=>{if(!byT[s.team])byT[s.team]=[];byT[s.team].push(s);});
+      const tc2={질문:'sp-q',확인:'sp-c',공유:'sp-s'};const tb={질문:'tbg-q',확인:'tbg-c',공유:'tbg-s'};
+      tEl.innerHTML=Object.entries(byT).map(([team,ms])=>{const tf={};ms.forEach(m=>{if(m.q2type)tf[m.q2type]=(tf[m.q2type]||0)+1;});const dt=Object.entries(tf).sort((a,b)=>b[1]-a[1])[0];
+        return`<div class="tb"><div class="th"><span style="font-size:14px;font-weight:600;">${team} <span style="font-size:12px;color:var(--text2);font-weight:400;">${ms.length}명</span></span>${dt?`<span class="tbg ${tb[dt[0]]||'tbg-c'}">${dt[0]} 개선 多</span>`:''}</div>${ms.map(m=>`<div class="mr"><div class="av">${m.name?m.name[0]:'?'}</div><div style="flex:1;min-width:0;"><div style="display:flex;align-items:center;flex-wrap:wrap;"><span style="font-size:13px;font-weight:600;">${m.name}</span>${m.q2type?`<span class="sp ${tc2[m.q2type]||'sp-c'}">${m.q2type}</span>`:''}<span class="cd">${m.code}</span></div><p style="font-size:12px;color:var(--text2);margin-top:2px;line-height:1.5;">${m.summary||m.q3}</p>${m.scores&&Object.keys(m.scores).length?`<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;">${Object.entries(m.scores).map(([p,sc])=>`<span class="sc-p">${{'1m':'1개월','3m':'3개월','6m':'6개월'}[p]||p} ${sc.personal}·${sc.group}</span>`).join('')}</div>`:''}</div></div>`).join('')}</div>`;}).join('');}
+    else tEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
+  }catch(e){document.getElementById('admin-info').textContent='데이터 로드 중 오류가 발생했습니다.';}
 }
+
 function renderTrend(id,subs){
   const el=document.getElementById(id);const pts=['1m','3m','6m'];const pl={'1m':'1개월 후','3m':'3개월 후','6m':'6개월 후'};
-  const data=pts.map(p=>{const sc=subs.flatMap(s=>(s.scores||[]).filter(x=>x.period===p));if(!sc.length)return null;return{label:pl[p],avgP:+(sc.reduce((a,b)=>a+b.personal,0)/sc.length).toFixed(1),avgG:+(sc.reduce((a,b)=>a+b.group,0)/sc.length).toFixed(1)};}).filter(Boolean);
+  const data=pts.map(p=>{const sc=subs.filter(s=>s.scores&&s.scores[p]).map(s=>s.scores[p]);if(!sc.length)return null;return{label:pl[p],avgP:+(sc.reduce((a,b)=>a+b.personal,0)/sc.length).toFixed(1),avgG:+(sc.reduce((a,b)=>a+b.group,0)/sc.length).toFixed(1)};}).filter(Boolean);
   if(!data.length){el.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 팔로우업 점수가 없습니다</span>';return;}
   el.innerHTML=`<div style="display:flex;gap:12px;margin-bottom:10px;"><span style="font-size:12px;color:var(--text2);display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:#378ADD;display:inline-block;"></span>개인 실천</span><span style="font-size:12px;color:var(--text2);display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>공동 룰</span></div>`+data.map(d=>`<div class="tr"><span class="tl">${d.label}</span><div style="flex:1;display:flex;align-items:center;gap:8px;"><div class="bt" style="flex:1;"><div class="bf" style="width:${d.avgP*10}%;background:#378ADD;"></div></div><span class="sv">${d.avgP}</span></div><div style="flex:1;display:flex;align-items:center;gap:8px;margin-left:12px;"><div class="bt" style="flex:1;"><div class="bf" style="width:${d.avgG*10}%;background:#1D9E75;"></div></div><span class="sv">${d.avgG}</span></div></div>`).join('');
 }
+
 function renderFeel(id,subs,showName){
   const el=document.getElementById(id);const up=[],dn=[];
-  subs.forEach(s=>{(s.scores||[]).forEach(sc=>{const suf=showName?` <span style="font-size:11px;color:var(--text3);">· ${s.team} ${s.name}</span>`:'';const pts=['1m','3m','6m'];const ci=pts.indexOf(sc.period);const prev=ci>0?(s.scores||[]).find(x=>x.period===pts[ci-1]):null;
+  subs.forEach(s=>{if(!s.scores)return;const pts=['1m','3m','6m'];Object.entries(s.scores).forEach(([period,sc])=>{const suf=showName?` <span style="font-size:11px;color:var(--text3);">· ${s.team} ${s.name}</span>`:'';const ci=pts.indexOf(period);const prev=ci>0&&s.scores[pts[ci-1]]?s.scores[pts[ci-1]]:null;
     if(sc.ctxPersonal){const d=prev?sc.personal-prev.personal:null;(d===null||d>=0?up:dn).push(`"${sc.ctxPersonal}"${suf}`);}
     if(sc.ctxGroup){const d=prev?sc.group-prev.group:null;(d===null||d>=0?up:dn).push(`"${sc.ctxGroup}"${suf}`);}});});
   if(!up.length&&!dn.length){el.innerHTML='<span style="font-size:13px;color:var(--text3);">팔로우업 기록이 쌓이면 표시됩니다</span>';return;}
@@ -323,48 +341,59 @@ function renderFeel(id,subs,showName){
   if(dn.length)h+=`<div><p style="font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:5px;"><span style="width:7px;height:7px;border-radius:50%;background:#D85A30;display:inline-block;"></span>점수가 내려갔을 때 — 필요한 도움</p>${dn.map(t=>`<div class="fi dn">${t}</div>`).join('')}</div>`;
   el.innerHTML=h;
 }
-function loadStu(){
-  const subs=getSubs(),rules=getRules();
-  const allKw=subs.flatMap(s=>s.keywords||[]);const kwEl=document.getElementById('s-kw');
-  if(allKw.length){const f={};allKw.forEach(k=>f[k]=(f[k]||0)+1);const s=Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,10);kwEl.innerHTML=s.map(([k,n])=>`<span class="kw${n>=3?' lg':''}">${k}${n>1?` <span style="font-size:11px;opacity:.65;">${n}</span>`:''}</span>`).join('');}
-  else kwEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
-  const rEl=document.getElementById('s-rules');
-  if(rules.length)rEl.innerHTML=rules.map((r,i)=>`<div class="rr"><span class="rn">${i+1}</span><span class="rt">${r}</span></div>`).join('');
-  else rEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span>';
-  const tc={질문:0,확인:0,공유:0};subs.forEach(s=>{if(s.q2type&&tc[s.q2type]!==undefined)tc[s.q2type]++;});
-  const tot=Object.values(tc).reduce((a,b)=>a+b,0);const bEl=document.getElementById('s-bars');
-  if(tot){const cols={질문:'#EF9F27',확인:'#1D9E75',공유:'#378ADD'};const dom=Object.entries(tc).sort((a,b)=>b[1]-a[1])[0][0];
-    bEl.innerHTML=Object.entries(tc).map(([l,c])=>`<div class="br"><span class="bl">${l}</span><div class="bt"><div class="bf" style="width:${Math.round(c/tot*100)}%;background:${cols[l]};"></div></div><span class="bc">${c}명</span></div>`).join('')+`<p style="font-size:13px;color:var(--text2);margin-top:12px;padding:12px;background:var(--bg2);border-radius:var(--r);line-height:1.7;">우리 직급에서 가장 많은 분이 <strong>"${dom}하기"</strong>를 어려워하고 있어요. 나만 그런 게 아니라는 걸 기억해 두세요.</p>`;}
-  else bEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
-  renderTrend('s-scores',subs);renderFeel('s-feel',subs,false);
+
+async function loadStu(){
+  try{
+    const [subsData,rules]=await Promise.all([fbGet('/submissions'),fbGet('/rules')]);
+    const subs=subsData?Object.values(subsData):[];
+    const ruleList=rules||[];
+    const allKw=subs.flatMap(s=>s.keywords||[]);const kwEl=document.getElementById('s-kw');
+    if(allKw.length){const f={};allKw.forEach(k=>f[k]=(f[k]||0)+1);const sorted=Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,10);kwEl.innerHTML=sorted.map(([k,n])=>`<span class="kw${n>=3?' lg':''}">${k}${n>1?` <span style="font-size:11px;opacity:.65;">${n}</span>`:''}</span>`).join('');}
+    else kwEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
+    const rEl=document.getElementById('s-rules');
+    if(ruleList.length)rEl.innerHTML=ruleList.map((r,i)=>`<div class="rr"><span class="rn">${i+1}</span><span class="rt">${r}</span></div>`).join('');
+    else rEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span>';
+    const tc={질문:0,확인:0,공유:0};subs.forEach(s=>{if(s.q2type&&tc[s.q2type]!==undefined)tc[s.q2type]++;});
+    const tot=Object.values(tc).reduce((a,b)=>a+b,0);const bEl=document.getElementById('s-bars');
+    if(tot){const cols={질문:'#EF9F27',확인:'#1D9E75',공유:'#378ADD'};const dom=Object.entries(tc).sort((a,b)=>b[1]-a[1])[0][0];
+      bEl.innerHTML=Object.entries(tc).map(([l,c])=>`<div class="br"><span class="bl">${l}</span><div class="bt"><div class="bf" style="width:${Math.round(c/tot*100)}%;background:${cols[l]};"></div></div><span class="bc">${c}명</span></div>`).join('')+`<p style="font-size:13px;color:var(--text2);margin-top:12px;padding:12px;background:var(--bg2);border-radius:var(--r);line-height:1.7;">우리 직급에서 가장 많은 분이 <strong>"${dom}하기"</strong>를 어려워하고 있어요. 나만 그런 게 아니라는 걸 기억해 두세요.</p>`;}
+    else bEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
+    renderTrend('s-scores',subs);renderFeel('s-feel',subs,false);
+  }catch{}
 }
+
 function stuTab(id,el){
   document.querySelectorAll('#sc-stu .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');
   document.getElementById('stu-group').style.display=id==='group'?'block':'none';
   document.getElementById('stu-my').style.display=id==='my'?'block':'none';
 }
-function stuLookup(){
+
+async function stuLookup(){
   const code=document.getElementById('stu-code').value.trim().toUpperCase();
-  const found=getSubs().find(x=>x.code===code);
-  if(!found){document.getElementById('stu-err').style.display='block';return;}
-  document.getElementById('stu-err').style.display='none';
-  document.getElementById('stu-sum').textContent=found.summary||found.q3||'';
-  document.getElementById('stu-kw').innerHTML=(found.keywords||[]).map(k=>`<span class="kw blue">${k}</span>`).join('');
-  const sc=found.scores||[];const pl={'1m':'1개월 후','3m':'3개월 후','6m':'6개월 후'};
-  const scEl=document.getElementById('stu-scores');
-  if(sc.length)scEl.innerHTML=sc.map(s=>`<div class="pp"><p style="font-size:13px;font-weight:600;margin-bottom:6px;">${pl[s.period]||s.period}</p><div style="display:flex;gap:6px;"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:var(--blue-bg);color:var(--blue-t);">개인 ${s.personal}점</span><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:var(--teal-bg);color:var(--teal-t);">공동 룰 ${s.group}점</span></div></div>`).join('');
-  else scEl.innerHTML='<p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 팔로우업 점수가 없습니다</p>';
-  const ctEl=document.getElementById('stu-ctx');const ci=sc.filter(s=>s.ctxPersonal||s.ctxGroup);
-  if(ci.length)ctEl.innerHTML=ci.map(s=>`<div class="pp"><p style="font-size:13px;font-weight:600;margin-bottom:6px;">${pl[s.period]||s.period}</p>${s.ctxPersonal?`<div style="font-size:12px;background:var(--bg2);padding:8px;border-radius:var(--r);margin-bottom:5px;line-height:1.6;"><span style="font-size:11px;font-weight:600;color:var(--teal-t);display:block;margin-bottom:2px;">개인 Action Plan</span>${s.ctxPersonal}</div>`:''}${s.ctxGroup?`<div style="font-size:12px;background:var(--bg2);padding:8px;border-radius:var(--r);line-height:1.6;"><span style="font-size:11px;font-weight:600;color:var(--teal-t);display:block;margin-bottom:2px;">공동 협업 룰</span>${s.ctxGroup}</div>`:''}</div>`).join('');
-  else ctEl.innerHTML='<p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 기록이 없습니다</p>';
-  document.getElementById('stu-code-step').style.display='none';
-  document.getElementById('stu-result').style.display='block';
+  try{
+    const data=await fbGet('/submissions/'+code);
+    if(!data){document.getElementById('stu-err').style.display='block';return;}
+    document.getElementById('stu-err').style.display='none';
+    document.getElementById('stu-sum').textContent=data.summary||data.q3||'';
+    document.getElementById('stu-kw').innerHTML=(data.keywords||[]).map(k=>`<span class="kw blue">${k}</span>`).join('');
+    const scores=data.scores||{};const pl={'1m':'1개월 후','3m':'3개월 후','6m':'6개월 후'};
+    const scEl=document.getElementById('stu-scores');
+    if(Object.keys(scores).length)scEl.innerHTML=Object.entries(scores).map(([p,s])=>`<div class="pp"><p style="font-size:13px;font-weight:600;margin-bottom:6px;">${pl[p]||p}</p><div style="display:flex;gap:6px;"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:var(--blue-bg);color:var(--blue-t);">개인 ${s.personal}점</span><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:var(--teal-bg);color:var(--teal-t);">공동 룰 ${s.group}점</span></div></div>`).join('');
+    else scEl.innerHTML='<p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 팔로우업 점수가 없습니다</p>';
+    const ctEl=document.getElementById('stu-ctx');const ci=Object.entries(scores).filter(([,s])=>s.ctxPersonal||s.ctxGroup);
+    if(ci.length)ctEl.innerHTML=ci.map(([p,s])=>`<div class="pp"><p style="font-size:13px;font-weight:600;margin-bottom:6px;">${pl[p]||p}</p>${s.ctxPersonal?`<div style="font-size:12px;background:var(--bg2);padding:8px;border-radius:var(--r);margin-bottom:5px;line-height:1.6;"><span style="font-size:11px;font-weight:600;color:var(--teal-t);display:block;margin-bottom:2px;">개인 Action Plan</span>${s.ctxPersonal}</div>`:''}${s.ctxGroup?`<div style="font-size:12px;background:var(--bg2);padding:8px;border-radius:var(--r);line-height:1.6;"><span style="font-size:11px;font-weight:600;color:var(--teal-t);display:block;margin-bottom:2px;">공동 협업 룰</span>${s.ctxGroup}</div>`:''}</div>`).join('');
+    else ctEl.innerHTML='<p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 기록이 없습니다</p>';
+    document.getElementById('stu-code-step').style.display='none';
+    document.getElementById('stu-result').style.display='block';
+  }catch{document.getElementById('stu-err').style.display='block';}
 }
+
 function stuReset(){
   document.getElementById('stu-code').value='';
   document.getElementById('stu-code-step').style.display='block';
   document.getElementById('stu-result').style.display='none';
 }
+
 window.onload=initScreen;
 </script>
 </body>
