@@ -13,9 +13,9 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;}
 .screen{display:none;}.screen.active{display:block;}
 .wrap{max-width:480px;margin:0 auto;padding:1.5rem 1rem;}
-.wrap-w{max-width:720px;margin:0 auto;padding:1.5rem 1rem;}
+.wrap-w{max-width:680px;margin:0 auto;padding:1.5rem 1rem;}
 .hd{background:var(--bg);border-bottom:0.5px solid var(--border);padding:14px 1rem;position:sticky;top:0;z-index:10;}
-.hd-in{max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.hd-in{max-width:680px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
 .hd-t{font-size:15px;font-weight:600;}
 .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem;margin-bottom:1rem;}
 .ct{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;}
@@ -28,27 +28,19 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--text);}
 input::placeholder,textarea::placeholder{color:var(--text3);}
 textarea{resize:none;line-height:1.6;}
 .fl{font-size:13px;color:var(--text2);margin-bottom:6px;display:block;}
-.hint{font-size:12px;color:var(--text3);margin-top:5px;line-height:1.5;}
 .prog{display:flex;gap:4px;margin-bottom:1.5rem;}
 .pd{flex:1;height:3px;border-radius:99px;background:var(--border);}
-.pd.done{background:var(--teal);}.pd.on{background:var(--blue);}
+.pd.on{background:var(--blue);}
 .step{display:none;}.step.active{display:block;}
 .sl{font-size:12px;color:var(--text3);margin-bottom:4px;}
 .st{font-size:20px;font-weight:600;margin-bottom:6px;line-height:1.4;}
 .ss{font-size:14px;color:var(--text2);margin-bottom:1.25rem;line-height:1.6;}
-.chip-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;}
-.chip-hint{font-size:12px;color:var(--text3);margin-bottom:12px;display:block;}
-.chips{display:flex;gap:10px;margin-bottom:1.25rem;}
-.chip{flex:1;padding:14px 8px;border-radius:var(--r);border:2px solid var(--border2);font-size:13px;font-weight:600;cursor:pointer;color:var(--text2);background:var(--bg);font-family:inherit;text-align:center;}
-.chip:hover{border-color:var(--blue);color:var(--blue-t);background:var(--blue-bg);}
-.chip.on{background:var(--blue-bg);color:var(--blue-t);border-color:var(--blue);box-shadow:0 0 0 3px rgba(55,138,221,0.15);}
-.chip-icon{font-size:22px;display:block;margin-bottom:6px;}
 .sum-box{background:var(--bg2);border-radius:var(--rl);padding:1rem;}
 .sum-l{font-size:12px;color:var(--text2);margin-bottom:4px;}
 .sum-t{font-size:14px;line-height:1.7;}
 .mode-btn{width:100%;padding:16px;border-radius:var(--rl);border:0.5px solid var(--border2);background:var(--bg);font-size:15px;cursor:pointer;font-family:inherit;color:var(--text);text-align:left;display:flex;align-items:center;gap:14px;margin-bottom:10px;}
 .mode-btn:hover{background:var(--bg2);}
-.rw{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;}
+.rw{display:flex;align-items:center;gap:12px;margin-bottom:1rem;}
 input[type=range]{flex:1;accent-color:var(--text);}
 .rv{font-size:22px;font-weight:600;min-width:28px;text-align:right;}
 .cb{border-radius:var(--r);padding:14px;margin:1rem 0;}
@@ -126,66 +118,271 @@ input[type=range]{flex:1;accent-color:var(--text);}
 .line-legend{display:flex;gap:16px;justify-content:center;margin-top:12px;}
 .line-legend-item{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:5px;}
 .line-dot{width:10px;height:3px;border-radius:99px;display:inline-block;}
+
+/* 스크롤형 입력 */
+.sec-divider{height:0.5px;background:var(--border);margin:1.5rem 0;}
+.sec-label{font-size:12px;font-weight:600;color:var(--text3);margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+.sec-q{font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px;line-height:1.4;}
+.sec-hint{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.5;}
+.improve-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:10px;}
+.improve-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.improve-icon{font-size:18px;color:var(--text2);}
+.improve-label{font-size:14px;font-weight:600;color:var(--text);}
+.improve-card textarea{margin-bottom:0;min-height:80px;background:var(--bg2);border-color:var(--border);}
+.vow-card{background:var(--teal-bg);border-radius:var(--r);padding:14px;border-left:3px solid var(--teal);margin-bottom:0;}
+.vow-label{font-size:12px;color:var(--teal-t);font-weight:600;margin-bottom:6px;}
+.vow-card textarea{background:transparent;border:none;padding:0;min-height:80px;font-size:14px;margin-bottom:0;color:var(--teal-t);}
+.vow-card textarea::placeholder{color:rgba(8,80,65,0.5);}
+.score-main-card{background:var(--blue-bg);border-radius:var(--r);padding:14px;border:0.5px solid #85B7EB;margin-bottom:10px;}
+.score-main-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.score-main-label{font-size:13px;color:var(--blue-t);font-weight:600;}
+.score-main-val{font-size:28px;font-weight:600;color:var(--blue-t);}
+.score-sub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.score-sub-card{background:var(--bg);border-radius:var(--r);padding:10px 8px;text-align:center;border:0.5px solid var(--border);}
+.score-sub-label{font-size:11px;color:var(--text2);display:block;margin-bottom:4px;}
+.score-sub-val{font-size:20px;font-weight:600;color:var(--text);}
 </style>
 </head>
 <body>
 
+<!-- 직원 입력 화면 -->
 <div class="screen" id="sc-emp">
 <div class="hd"><div class="hd-in"><span class="hd-t">팀인크레더블 Action Plan</span><span style="font-size:11px;padding:3px 10px;border-radius:99px;background:var(--blue-bg);color:var(--blue-t);font-weight:600;">사원·주임·대리급</span></div></div>
 <div class="wrap">
+
+  <!-- 모드 선택 -->
   <div id="emp-mode">
     <div style="padding:1rem 0 1.5rem;"><p class="st">안녕하세요 👋</p><p class="ss">처음 작성하시나요, 팔로우업 점수를 입력하시나요?</p></div>
     <button class="mode-btn" onclick="startNew()"><span style="font-size:22px;">✏️</span><div><div style="font-size:15px;font-weight:600;">Action Plan 처음 작성하기</div><div style="font-size:12px;color:var(--text2);margin-top:2px;">교육 당일 처음 참여하는 분</div></div></button>
     <button class="mode-btn" onclick="startFU()"><span style="font-size:22px;">📈</span><div><div style="font-size:15px;font-weight:600;">팔로우업 점수 입력하기</div><div style="font-size:12px;color:var(--text2);margin-top:2px;">1개월·3개월·6개월 후 점수 입력</div></div></button>
   </div>
-  <div id="emp-new" style="display:none;">
-    <div class="prog"><div class="pd on" id="d0"></div><div class="pd" id="d1"></div><div class="pd" id="d2"></div><div class="pd" id="d3"></div><div class="pd" id="d4"></div><div class="pd" id="d5"></div></div>
-    <div class="step active" id="s0"><p class="sl">시작하기</p><p class="st">내 정보를 입력해 주세요</p><p class="ss">나중에 내 기록을 볼 때 사용됩니다.</p><label class="fl">이름</label><input type="text" id="inp-name" placeholder="이름"><label class="fl">팀</label><input type="text" id="inp-team" placeholder="예) 생산1팀"><label class="fl">직급</label><select id="inp-grade"><option value="">선택해 주세요</option><option>사원</option><option>주임</option><option>대리</option></select><label class="fl">이메일</label><input type="email" id="inp-email" placeholder="예) hong@company.com"><label class="fl">비밀번호 (생일 4자리)</label><p style="font-size:12px;color:var(--text3);margin-bottom:8px;line-height:1.5;">예) 3월 15일생이면 0315 · 나중에 내 기록 조회 시 사용합니다.</p><input type="password" id="inp-pw" placeholder="생일 4자리" maxlength="4" inputmode="numeric"><button class="btn" onclick="nx(0)">시작하기</button></div>
-    <div class="step" id="s1"><p class="sl">Q1 · 오늘 활동 느낀 점</p><p class="st">오늘 활동에서 경험한 나의 협업 소통 방식에서 내가 느낀 점은 무엇인가?</p><textarea id="inp-q1" style="min-height:160px;" placeholder="예) 내가 큰 동그라미를 말했는데 상대방은 작은 동그라미로 이해하고 있었다. 같은 단어를 써도 서로 다르게 이해할 수 있다는 걸 느꼈다. 앞으로는 더 디테일하게 설명해야겠다."></textarea><p class="hint">활동과 연결짓기 어려우면 평소 느낌을 자유롭게 써도 됩니다.</p><button class="btn" onclick="nx(1)" style="margin-top:1rem;">다음</button><button class="btn btn-o" onclick="bk(1)">이전</button></div>
-    <div class="step" id="s2"><p class="sl">Q2 · 개선 포인트</p><p class="st">협업을 위한 소통 과정에서 내가 개선이 필요하다고 느낀 것은?</p><span class="chip-label">아래 중 하나를 눌러 선택해 주세요 👇</span><span class="chip-hint">선택하면 파란색으로 바뀝니다.</span><div class="chips"><button class="chip" onclick="selChip(this)"><span class="chip-icon">🙋</span>질문하기</button><button class="chip" onclick="selChip(this)"><span class="chip-icon">✅</span>확인하기</button><button class="chip" onclick="selChip(this)"><span class="chip-icon">📢</span>공유하기</button></div><label class="fl">구체적인 상황을 적어주세요</label><textarea id="inp-q2" style="min-height:140px;" placeholder="예) 업무 지시를 받고 바로 진행했는데, 나중에 방향이 달랐다는 걸 알게 됐다. 시작 전에 한 번 더 확인했으면 좋았을 것 같다."></textarea><button class="btn" onclick="nx(2)" style="margin-top:1rem;">다음</button><button class="btn btn-o" onclick="bk(2)">이전</button></div>
-    <div class="step" id="s3"><p class="sl">Q3 · 행동 정의</p><p class="st">내일부터 다르게 할 행동 1가지</p><p class="ss">구체적일수록 실천 가능성이 높아집니다.</p><textarea id="inp-q3" style="min-height:140px;" placeholder="예) 업무 지시를 받은 뒤, 내가 이해한 내용을 한 문장으로 말하고 확인을 받고 시작한다."></textarea><button class="btn" onclick="nx(3)" style="margin-top:1rem;">다음</button><button class="btn btn-o" onclick="bk(3)">이전</button></div>
-    <div class="step" id="s4"><p class="sl">Q4 · 반복 조건</p><p class="st">언제, 어떤 상황에서 실천할 건가요?</p><p class="ss">습관이 되려면 언제 할지가 구체적이어야 합니다.</p><textarea id="inp-q4" style="min-height:140px;" placeholder="예) 매일 오전 업무 지시를 받을 때마다"></textarea><button class="btn" id="btn-sub" onclick="doSubmit()" style="margin-top:1rem;">AI 요약 후 제출하기</button><button class="btn btn-o" onclick="bk(4)">이전</button></div>
-    <div class="step" id="s5"><div style="text-align:center;padding:1rem 0;"><div style="font-size:40px;margin-bottom:1rem;">✅</div><p class="st">제출 완료</p><p class="ss" style="margin-top:8px;">Action Plan이 대시보드에 올라갔습니다.</p></div><div class="sum-box" style="margin-bottom:1rem;"><p class="sum-l">내 Action Plan 요약</p><p class="sum-t" id="done-sum"></p></div><div style="background:var(--blue-bg);border-radius:var(--rl);padding:1rem;text-align:center;"><p style="font-size:12px;color:var(--blue-t);margin-bottom:4px;">나중에 내 기록을 보려면</p><p style="font-size:14px;color:var(--blue-t);font-weight:600;">이메일 + 생일 4자리로 로그인</p></div></div>
+
+  <!-- Step 1: 내 정보 -->
+  <div id="emp-info" style="display:none;">
+    <p class="sl">시작하기</p>
+    <p class="st">내 정보를 입력해 주세요</p>
+    <p class="ss">나중에 내 기록을 볼 때 사용됩니다.</p>
+    <label class="fl">이름</label><input type="text" id="inp-name" placeholder="이름">
+    <label class="fl">팀</label><input type="text" id="inp-team" placeholder="예) 생산1팀">
+    <label class="fl">직급</label>
+    <select id="inp-grade"><option value="">선택해 주세요</option><option>사원</option><option>주임</option><option>대리</option></select>
+    <label class="fl">이메일</label><input type="email" id="inp-email" placeholder="예) hong@company.com">
+    <label class="fl">비밀번호 (생일 4자리)</label>
+    <p style="font-size:12px;color:var(--text3);margin-bottom:8px;line-height:1.5;">예) 3월 15일생이면 0315 · 나중에 내 기록 조회 시 사용합니다.</p>
+    <input type="password" id="inp-pw" placeholder="생일 4자리" maxlength="4" inputmode="numeric">
+    <button class="btn" onclick="goToForm()">다음</button>
+    <button class="btn btn-o" onclick="backMode()">이전</button>
   </div>
+
+  <!-- 스크롤형 작성 폼 -->
+  <div id="emp-form" style="display:none;">
+
+    <div class="sec-label"><i class="ti ti-mood-smile" style="font-size:15px;" aria-hidden="true"></i> 오늘 느낀 점</div>
+    <p class="sec-q">오늘 활동에서 경험한 나의 협업 소통 방식에서 내가 느낀 점은?</p>
+    <textarea id="inp-q1" style="min-height:120px;" placeholder="예) 내가 큰 동그라미를 말했는데 상대방은 작은 동그라미로 이해하고 있었다. 같은 단어도 서로 다르게 이해할 수 있다는 걸 느꼈다. 앞으로는 더 디테일하게 설명해야겠다."></textarea>
+
+    <div class="sec-divider"></div>
+
+    <div class="sec-label"><i class="ti ti-target" style="font-size:15px;" aria-hidden="true"></i> 내가 더 잘해야겠다고 생각하는 포인트는?</div>
+    <p class="sec-hint">각각 한 문장씩 써주세요.</p>
+    <div class="improve-card">
+      <div class="improve-top"><i class="ti ti-help-circle improve-icon" aria-hidden="true"></i><span class="improve-label">질문하기</span></div>
+      <textarea id="inp-q2" placeholder="예) 모르면 바로 물어보지 못하고 혼자 고민하는 경향이 있다."></textarea>
+    </div>
+    <div class="improve-card">
+      <div class="improve-top"><i class="ti ti-circle-check improve-icon" aria-hidden="true"></i><span class="improve-label">확인하기</span></div>
+      <textarea id="inp-q3" placeholder="예) 지시를 받고 바로 진행했다가 방향이 달랐던 적이 있다."></textarea>
+    </div>
+    <div class="improve-card">
+      <div class="improve-top"><i class="ti ti-share improve-icon" aria-hidden="true"></i><span class="improve-label">공유하기</span></div>
+      <textarea id="inp-q4" placeholder="예) 진행 상황을 더 자주 팀에 알려야겠다."></textarea>
+    </div>
+
+    <div class="sec-divider"></div>
+
+    <div class="sec-label"><i class="ti ti-pencil" style="font-size:15px;" aria-hidden="true"></i> 나의 다짐</div>
+    <p class="sec-q">나의 협업 소통 개선을 위한 다짐 한 문장</p>
+    <div class="vow-card">
+      <p class="vow-label">한 문장으로 정리해 주세요</p>
+      <textarea id="inp-vow" placeholder="예) 업무 시작 전 반드시 이해한 내용을 한 문장으로 확인하고 진행한다."></textarea>
+    </div>
+
+    <div class="sec-divider"></div>
+
+    <div class="sec-label"><i class="ti ti-chart-bar" style="font-size:15px;" aria-hidden="true"></i> 지금 내 점수</div>
+    <p class="sec-q">지금 나의 협업 소통 점수는?</p>
+    <p class="sec-hint">솔직하게 점수를 매겨보세요. (1~10점)</p>
+
+    <div class="score-main-card">
+      <div class="score-main-top">
+        <span class="score-main-label">전체 소통 점수</span>
+        <span class="score-main-val" id="score-total-val">5점</span>
+      </div>
+      <input type="range" min="1" max="10" value="5" id="score-total" step="1" oninput="document.getElementById('score-total-val').textContent=this.value+'점'">
+    </div>
+
+    <div class="score-sub-grid">
+      <div class="score-sub-card">
+        <span class="score-sub-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 질문하기</span>
+        <span class="score-sub-val" id="score-q-val">5</span>
+        <input type="range" min="1" max="10" value="5" id="score-q" step="1" style="width:100%;margin-top:6px;accent-color:var(--text);" oninput="document.getElementById('score-q-val').textContent=this.value">
+      </div>
+      <div class="score-sub-card">
+        <span class="score-sub-label"><i class="ti ti-circle-check" aria-hidden="true"></i> 확인하기</span>
+        <span class="score-sub-val" id="score-c-val">5</span>
+        <input type="range" min="1" max="10" value="5" id="score-c" step="1" style="width:100%;margin-top:6px;accent-color:var(--text);" oninput="document.getElementById('score-c-val').textContent=this.value">
+      </div>
+      <div class="score-sub-card">
+        <span class="score-sub-label"><i class="ti ti-share" aria-hidden="true"></i> 공유하기</span>
+        <span class="score-sub-val" id="score-s-val">5</span>
+        <input type="range" min="1" max="10" value="5" id="score-s" step="1" style="width:100%;margin-top:6px;accent-color:var(--text);" oninput="document.getElementById('score-s-val').textContent=this.value">
+      </div>
+    </div>
+
+    <button class="btn" id="btn-sub" onclick="doSubmit()" style="margin-top:1.5rem;">제출하기</button>
+    <button class="btn btn-o" onclick="backToInfo()">이전</button>
+
+    <div id="submit-done" style="display:none;text-align:center;padding:2rem 0;">
+      <div style="font-size:40px;margin-bottom:1rem;">✅</div>
+      <p class="st">제출 완료</p>
+      <p class="ss" style="margin-top:8px;">Action Plan이 대시보드에 올라갔습니다.</p>
+      <div style="background:var(--blue-bg);border-radius:var(--rl);padding:1rem;margin-top:1rem;">
+        <p style="font-size:12px;color:var(--blue-t);margin-bottom:4px;">나중에 내 기록을 보려면</p>
+        <p style="font-size:14px;color:var(--blue-t);font-weight:600;">이메일 + 생일 4자리로 로그인</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 팔로우업 -->
   <div id="emp-fu" style="display:none;">
-    <div id="fu-login-step"><div style="padding:1rem 0 1.5rem;"><p class="sl">팔로우업</p><p class="st">로그인해 주세요</p><p class="ss">처음 작성할 때 입력한 이메일과 생일 4자리를 입력하세요.</p></div><label class="fl">이메일</label><input type="email" id="fu-email" placeholder="예) hong@company.com"><label class="fl">비밀번호 (생일 4자리)</label><input type="password" id="fu-pw" placeholder="생일 4자리" maxlength="4" inputmode="numeric"><p class="err" id="fu-err">이메일 또는 비밀번호가 맞지 않습니다.</p><button class="btn" onclick="lookupFU()" style="margin-top:4px;">확인</button><button class="btn btn-o" onclick="backMode()">이전</button></div>
-    <div id="fu-score-step" style="display:none;"><div class="sum-box" style="margin-bottom:1.25rem;"><p class="sum-l">내 Action Plan</p><p class="sum-t" id="fu-sum"></p></div><label class="fl">점수 입력 시점</label><select id="fu-period" onchange="renderCtx()" style="margin-bottom:1rem;"><option value="">선택해 주세요</option><option value="1m">1개월 후</option><option value="3m">3개월 후</option><option value="6m">6개월 후</option></select><label class="fl">개인 Action Plan 실천 점수 (1~10)</label><p class="hint" style="margin-bottom:10px;">내가 정한 행동을 얼마나 실천하고 있는가?</p><div class="rw"><input type="range" min="1" max="10" value="5" id="sp" step="1" oninput="document.getElementById('spv').textContent=this.value;renderCtx()"><span class="rv" id="spv">5</span></div><label class="fl">공동 협업 룰 실천 점수 (1~10)</label><p class="hint" style="margin-bottom:10px;">우리 직급이 공동 룰을 얼마나 지키고 있는가?</p><div class="rw"><input type="range" min="1" max="10" value="5" id="sg" step="1" oninput="document.getElementById('sgv').textContent=this.value;renderCtx()"><span class="rv" id="sgv">5</span></div><div id="ctx-area" style="display:none;"><div id="ctx-p" class="cb sm"><p class="ct2 sm" id="ctx-p-tag"></p><textarea id="ctx-p-ta" style="background:transparent;border:none;padding:0;min-height:80px;font-size:13px;margin-bottom:0;"></textarea></div><div id="ctx-g" class="cb sm" style="margin-top:10px;"><p class="ct2 sm" id="ctx-g-tag"></p><textarea id="ctx-g-ta" style="background:transparent;border:none;padding:0;min-height:80px;font-size:13px;margin-bottom:0;"></textarea></div></div><button class="btn" onclick="submitFU()" style="margin-top:1rem;">제출하기</button><div id="fu-done" style="display:none;text-align:center;padding:2rem 0;"><div style="font-size:40px;margin-bottom:1rem;">✅</div><p style="font-size:16px;font-weight:600;">점수가 등록됐습니다</p></div></div>
+    <div id="fu-login-step">
+      <div style="padding:1rem 0 1.5rem;"><p class="sl">팔로우업</p><p class="st">로그인해 주세요</p><p class="ss">처음 작성할 때 입력한 이메일과 생일 4자리를 입력하세요.</p></div>
+      <label class="fl">이메일</label><input type="email" id="fu-email" placeholder="예) hong@company.com">
+      <label class="fl">비밀번호 (생일 4자리)</label><input type="password" id="fu-pw" placeholder="생일 4자리" maxlength="4" inputmode="numeric">
+      <p class="err" id="fu-err">이메일 또는 비밀번호가 맞지 않습니다.</p>
+      <button class="btn" onclick="lookupFU()" style="margin-top:4px;">확인</button>
+      <button class="btn btn-o" onclick="backMode()">이전</button>
+    </div>
+    <div id="fu-score-step" style="display:none;">
+      <div class="sum-box" style="margin-bottom:1.25rem;"><p class="sum-l">내 Action Plan 요약</p><p class="sum-t" id="fu-sum"></p></div>
+      <label class="fl">점수 입력 시점</label>
+      <select id="fu-period" onchange="renderCtx()" style="margin-bottom:1rem;"><option value="">선택해 주세요</option><option value="1m">1개월 후</option><option value="3m">3개월 후</option><option value="6m">6개월 후</option></select>
+
+      <div class="sec-label" style="margin-top:1rem;"><i class="ti ti-chart-bar" style="font-size:15px;" aria-hidden="true"></i> 지금 내 점수</div>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">솔직하게 점수를 매겨보세요. (1~10점)</p>
+      <div class="score-main-card">
+        <div class="score-main-top">
+          <span class="score-main-label">전체 소통 점수</span>
+          <span class="score-main-val" id="fu-total-val">5점</span>
+        </div>
+        <input type="range" min="1" max="10" value="5" id="fu-total" step="1" oninput="document.getElementById('fu-total-val').textContent=this.value+'점';renderCtx()">
+      </div>
+      <div class="score-sub-grid" style="margin-bottom:1rem;">
+        <div class="score-sub-card">
+          <span class="score-sub-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 질문하기</span>
+          <span class="score-sub-val" id="fu-q-val">5</span>
+          <input type="range" min="1" max="10" value="5" id="fu-q" step="1" style="width:100%;margin-top:6px;accent-color:var(--text);" oninput="document.getElementById('fu-q-val').textContent=this.value">
+        </div>
+        <div class="score-sub-card">
+          <span class="score-sub-label"><i class="ti ti-circle-check" aria-hidden="true"></i> 확인하기</span>
+          <span class="score-sub-val" id="fu-c-val">5</span>
+          <input type="range" min="1" max="10" value="5" id="fu-c" step="1" style="width:100%;margin-top:6px;accent-color:var(--text);" oninput="document.getElementById('fu-c-val').textContent=this.value">
+        </div>
+        <div class="score-sub-card">
+          <span class="score-sub-label"><i class="ti ti-share" aria-hidden="true"></i> 공유하기</span>
+          <span class="score-sub-val" id="fu-s-val">5</span>
+          <input type="range" min="1" max="10" value="5" id="fu-s" step="1" style="width:100%;margin-top:6px;accent-color:var(--text);" oninput="document.getElementById('fu-s-val').textContent=this.value">
+        </div>
+      </div>
+
+      <div id="ctx-area" style="display:none;">
+        <div id="ctx-p" class="cb sm"><p class="ct2 sm" id="ctx-p-tag"></p><textarea id="ctx-p-ta" style="background:transparent;border:none;padding:0;min-height:80px;font-size:13px;margin-bottom:0;"></textarea></div>
+        <div id="ctx-g" class="cb sm" style="margin-top:10px;"><p class="ct2 sm" id="ctx-g-tag"></p><textarea id="ctx-g-ta" style="background:transparent;border:none;padding:0;min-height:80px;font-size:13px;margin-bottom:0;"></textarea></div>
+      </div>
+      <button class="btn" onclick="submitFU()" style="margin-top:1rem;">제출하기</button>
+      <div id="fu-done" style="display:none;text-align:center;padding:2rem 0;"><div style="font-size:40px;margin-bottom:1rem;">✅</div><p style="font-size:16px;font-weight:600;">점수가 등록됐습니다</p></div>
+    </div>
   </div>
+
 </div>
 </div>
 
-<div class="screen" id="sc-admin">
-<div class="hd"><div class="hd-in"><div><p class="hd-t">사원·주임·대리급 대시보드</p><p style="font-size:11px;color:var(--text2);margin-top:1px;">간부용 · 팀인크레더블 Action Plan</p></div><button onclick="loadAdmin()" style="background:transparent;border:0.5px solid var(--border2);border-radius:var(--r);padding:7px 12px;font-size:12px;cursor:pointer;font-family:inherit;color:var(--text2);">새로고침</button></div></div>
-<div class="wrap-w">
-  <div class="ed"><span style="width:8px;height:8px;border-radius:50%;background:var(--teal);display:inline-block;flex-shrink:0;"></span><span id="admin-info" style="font-size:13px;">데이터를 불러오는 중...</span></div>
-  <div class="stat-grid">
-    <div class="stat-card blue"><div style="font-size:20px;margin-bottom:10px;">📋</div><p class="stat-num blue" id="a-total">0</p><p class="stat-lbl blue">Action Plan 제출</p></div>
-    <div class="stat-card teal"><div style="font-size:20px;margin-bottom:10px;">👥</div><p class="stat-num teal" id="a-teams">0</p><p class="stat-lbl teal">참여 팀</p></div>
-  </div>
-  <div class="rb"><div class="rh"><span class="sec-badge badge-blue">교육 산출물 ①</span><span style="font-size:12px;color:var(--text3);margin-left:auto;" id="a-kw-cnt"></span></div><div class="rbd"><p class="ct">개인 Action Plan 핵심 키워드</p><p class="cs">직원 개개인이 스스로 바꾸겠다고 한 행동의 공통 패턴</p><div class="kw-wrap" id="a-kw"><span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span></div></div></div>
-  <div class="rb"><div class="rh"><span class="sec-badge badge-teal">교육 산출물 ②</span><span style="font-size:12px;color:var(--text3);margin-left:auto;" id="a-rule-cnt"></span></div><div class="rbd"><p class="ct">우리 직급 공동 협업 룰</p><p class="cs">함께 지키기로 한 소통 기준</p><div id="a-rules"><span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span></div><div style="border-top:0.5px solid var(--border);margin-top:14px;padding-top:14px;"><p style="font-size:12px;color:var(--text2);margin-bottom:10px;">공동 룰 등록 (대표자용)</p><input type="text" id="r1" placeholder="공동 룰 1"><input type="text" id="r2" placeholder="공동 룰 2"><input type="text" id="r3" placeholder="공동 룰 3"><button class="btn-sm" onclick="saveRules()">등록하기</button><p class="ok" id="rule-ok">✓ 공동 룰이 등록됐습니다.</p></div></div></div>
-  <div class="card"><p class="ct">소통·협업에서 어려워하는 것</p><p class="cs">질문·확인·공유 중 현업에서 가장 부족하다고 느낀 영역 분포</p><div class="chart-wrap"><canvas id="radarChart"></canvas></div><div class="stat-pills" id="radar-pills"></div><div class="ins" id="a-insight" style="display:none;margin-top:14px;"><p class="ins-t">💡 조직 시사점</p><div id="a-insight-txt"></div></div></div>
-  <div class="card"><p class="ct">실천 점수 변화 추이</p><p class="cs">팔로우업 시점별 평균 점수 (1~10점)</p><div style="position:relative;"><canvas id="lineChart"></canvas></div><div class="line-legend"><span class="line-legend-item"><span class="line-dot" style="background:#378ADD;"></span>개인 Action Plan</span><span class="line-legend-item"><span class="line-dot" style="background:#1D9E75;"></span>공동 협업 룰</span></div></div>
-  <div class="card"><p class="ct">직원들이 Action Plan 실행하면서 느낀 점</p><p class="cs">점수 변화의 이유 · 도움 요청 · 성공 요인</p><div id="a-feel"><span style="font-size:13px;color:var(--text3);">팔로우업 기록이 쌓이면 표시됩니다</span></div></div>
-  <div class="card"><p class="ct">팀별 Action Plan 현황</p><p class="cs">팀 단위로 묶어서 보기</p><div id="a-team-area"><span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span></div></div>
-</div>
-</div>
-
+<!-- 대시보드 -->
 <div class="screen" id="sc-stu">
-<div class="hd"><div class="hd-in"><div><p class="hd-t">팀인크레더블 Action Plan</p><p style="font-size:11px;color:var(--text2);margin-top:1px;">사원·주임·대리급</p></div></div></div>
-<div class="wrap">
-  <div class="tab-bar"><button class="tab active" onclick="stuTab('group',this)">우리 직급 현황</button><button class="tab" onclick="stuTab('my',this)">나의 Action Plan</button></div>
-  <div id="stu-group">
-    <div class="notice">🔒 이름·팀 정보 없이 익명으로 집계된 결과입니다.</div>
-    <div class="card"><p class="ct">개인 Action Plan 핵심 키워드</p><p class="cs">우리 직급이 스스로 바꾸겠다고 한 행동의 공통 패턴</p><div class="kw-wrap" id="s-kw"><span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span></div></div>
-    <div class="card"><p class="ct">우리 직급 공동 협업 룰</p><p class="cs">우리가 함께 지키기로 한 소통 기준</p><div id="s-rules"><span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span></div></div>
-    <div class="card"><p class="ct">소통·협업에서 어려워하는 것</p><div class="chart-wrap" style="max-width:260px;"><canvas id="radarChartStu"></canvas></div><div class="stat-pills" id="stu-radar-pills" style="margin-top:12px;"></div></div>
-    <div class="card"><p class="ct">우리 직급 실천 점수 평균</p><p class="cs">팔로우업 시점별 평균 점수 (1~10점)</p><div style="position:relative;"><canvas id="lineChartStu"></canvas></div><div class="line-legend"><span class="line-legend-item"><span class="line-dot" style="background:#378ADD;"></span>개인 실천</span><span class="line-legend-item"><span class="line-dot" style="background:#1D9E75;"></span>공동 룰</span></div></div>
-    <div class="card"><p class="ct">동료들이 Action Plan 실행하면서 느낀 점</p><p class="cs">무기명으로 공유된 경험입니다</p><div id="s-feel"><span style="font-size:13px;color:var(--text3);">팔로우업 기록이 쌓이면 표시됩니다</span></div></div>
+<div class="hd"><div class="hd-in"><div><p class="hd-t">팀인크레더블 대시보드</p><p style="font-size:11px;color:var(--text2);margin-top:1px;">사원·주임·대리급 · Action Plan 현황</p></div><button onclick="loadStu()" style="background:transparent;border:0.5px solid var(--border2);border-radius:var(--r);padding:7px 12px;font-size:12px;cursor:pointer;font-family:inherit;color:var(--text2);">새로고침</button></div></div>
+<div class="wrap-w">
+  <div class="ed"><span style="width:8px;height:8px;border-radius:50%;background:var(--teal);display:inline-block;flex-shrink:0;"></span><span id="dash-info" style="font-size:13px;">데이터를 불러오는 중...</span></div>
+  <div class="stat-grid">
+    <div class="stat-card blue"><div style="font-size:20px;margin-bottom:10px;">📋</div><p class="stat-num blue" id="d-total">0</p><p class="stat-lbl blue">Action Plan 제출</p></div>
+    <div class="stat-card teal"><div style="font-size:20px;margin-bottom:10px;">👥</div><p class="stat-num teal" id="d-teams">0</p><p class="stat-lbl teal">참여 팀</p></div>
   </div>
+
+  <div class="rb">
+    <div class="rh"><span class="sec-badge badge-blue">교육 산출물 ①</span><span style="font-size:12px;color:var(--text3);margin-left:auto;" id="d-kw-cnt"></span></div>
+    <div class="rbd"><p class="ct">개인 Action Plan 핵심 키워드</p><p class="cs">직원 개개인이 스스로 바꾸겠다고 한 행동의 공통 패턴</p><div class="kw-wrap" id="d-kw"><span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span></div></div>
+  </div>
+
+  <div class="rb">
+    <div class="rh"><span class="sec-badge badge-teal">교육 산출물 ②</span><span style="font-size:12px;color:var(--text3);margin-left:auto;" id="d-rule-cnt"></span></div>
+    <div class="rbd">
+      <p class="ct">우리 직급 공동 협업 룰</p><p class="cs">함께 지키기로 한 소통 기준</p>
+      <div id="d-rules"><span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span></div>
+      <div style="border-top:0.5px solid var(--border);margin-top:14px;padding-top:14px;">
+        <p style="font-size:12px;color:var(--text2);margin-bottom:10px;">공동 룰 등록 (대표자용)</p>
+        <input type="text" id="r1" placeholder="공동 룰 1"><input type="text" id="r2" placeholder="공동 룰 2"><input type="text" id="r3" placeholder="공동 룰 3">
+        <button class="btn-sm" onclick="saveRules()">등록하기</button>
+        <p class="ok" id="rule-ok">✓ 공동 룰이 등록됐습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="ct">소통·협업에서 어려워하는 것</p>
+    <p class="cs">질문·확인·공유 중 현업에서 가장 부족하다고 느낀 영역 분포</p>
+    <div class="chart-wrap"><canvas id="radarChart"></canvas></div>
+    <div class="stat-pills" id="radar-pills"></div>
+    <div class="ins" id="d-insight" style="display:none;margin-top:14px;"><p class="ins-t">💡 조직 시사점</p><div id="d-insight-txt"></div></div>
+  </div>
+
+  <div class="card">
+    <p class="ct">실천 점수 변화 추이</p>
+    <p class="cs">팔로우업 시점별 평균 점수 (1~10점)</p>
+    <div><canvas id="lineChart"></canvas></div>
+    <div class="line-legend"><span class="line-legend-item"><span class="line-dot" style="background:#378ADD;"></span>개인 실천</span><span class="line-legend-item"><span class="line-dot" style="background:#1D9E75;"></span>공동 룰</span></div>
+  </div>
+
+  <div class="card">
+    <p class="ct">직원들이 Action Plan 실행하면서 느낀 점</p>
+    <p class="cs">점수 변화의 이유 · 도움 요청 · 성공 요인</p>
+    <div id="d-feel"><span style="font-size:13px;color:var(--text3);">팔로우업 기록이 쌓이면 표시됩니다</span></div>
+  </div>
+
+  <div class="card">
+    <p class="ct">팀별 Action Plan 현황</p><p class="cs">팀 단위로 묶어서 보기</p>
+    <div id="d-team-area"><span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span></div>
+  </div>
+
+  <div class="tab-bar" style="margin-top:1rem;">
+    <button class="tab active" onclick="stuTab('group',this)">전체 현황</button>
+    <button class="tab" onclick="stuTab('my',this)">나의 Action Plan</button>
+  </div>
+  <div id="stu-group" style="display:none;"></div>
   <div id="stu-my" style="display:none;">
-    <div id="stu-login-step"><div class="notice">🔐 이메일과 생일 4자리를 입력하면 내 Action Plan과 기록을 볼 수 있습니다.</div><div class="card"><p class="ct" style="margin-bottom:10px;">로그인</p><label class="fl">이메일</label><input type="email" id="stu-email" placeholder="처음 작성 시 입력한 이메일"><label class="fl">비밀번호 (생일 4자리)</label><input type="password" id="stu-pw" placeholder="생일 4자리" maxlength="4" inputmode="numeric"><p class="err" id="stu-err">이메일 또는 비밀번호가 맞지 않습니다.</p><button class="btn" onclick="stuLookup()" style="margin-top:4px;">확인</button></div></div>
-    <div id="stu-result" style="display:none;"><div class="card"><p class="ct" style="margin-bottom:10px;">나의 Action Plan</p><div class="sum-box"><p class="sum-l">AI 요약</p><p class="sum-t" id="stu-sum"></p><div id="stu-kw" class="kw-wrap" style="margin-top:8px;"></div></div></div><div class="card"><p class="ct">나의 실천 점수 기록</p><div id="stu-scores"><p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 팔로우업 점수가 없습니다</p></div></div><div class="card"><p class="ct">내가 남긴 기록</p><div id="stu-ctx"><p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 기록이 없습니다</p></div></div><button class="btn btn-o" onclick="stuReset()">다른 계정으로 보기</button></div>
+    <div id="stu-login-step">
+      <div class="notice">🔐 이메일과 생일 4자리를 입력하면 내 Action Plan과 기록을 볼 수 있습니다.</div>
+      <div class="card"><p class="ct" style="margin-bottom:10px;">로그인</p>
+        <label class="fl">이메일</label><input type="email" id="stu-email" placeholder="처음 작성 시 입력한 이메일">
+        <label class="fl">비밀번호 (생일 4자리)</label><input type="password" id="stu-pw" placeholder="생일 4자리" maxlength="4" inputmode="numeric">
+        <p class="err" id="stu-err">이메일 또는 비밀번호가 맞지 않습니다.</p>
+        <button class="btn" onclick="stuLookup()" style="margin-top:4px;">확인</button>
+      </div>
+    </div>
+    <div id="stu-result" style="display:none;">
+      <div class="card"><p class="ct" style="margin-bottom:10px;">나의 Action Plan</p><div class="sum-box"><p class="sum-l">AI 요약</p><p class="sum-t" id="stu-sum"></p><div id="stu-kw" class="kw-wrap" style="margin-top:8px;"></div></div></div>
+      <div class="card"><p class="ct">나의 실천 점수 기록</p><div id="stu-scores"><p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 팔로우업 점수가 없습니다</p></div></div>
+      <div class="card"><p class="ct">내가 남긴 기록</p><div id="stu-ctx"><p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 기록이 없습니다</p></div></div>
+      <button class="btn btn-o" onclick="stuReset()">다른 계정으로 보기</button>
+    </div>
   </div>
 </div>
 </div>
@@ -195,49 +392,77 @@ const FIREBASE_URL='https://actionplan-f4ca1-default-rtdb.firebaseio.com';
 function fbGet(p){return fetch(FIREBASE_URL+p+'.json').then(r=>r.json());}
 function fbSet(p,d){return fetch(FIREBASE_URL+p+'.json',{method:'PUT',body:JSON.stringify(d)}).then(r=>r.json());}
 function emailToKey(e){return e.toLowerCase().replace(/[.#$[\]@]/g,'_');}
-let radarInst=null,lineInst=null,radarStuInst=null,lineStuInst=null;
+let radarInst=null,lineInst=null,fuRec=null,fuKey='';
 
 function initScreen(){
   const p=new URLSearchParams(window.location.search);const m=p.get('mode')||'employee';
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  if(m==='admin'){document.getElementById('sc-admin').classList.add('active');loadAdmin();}
-  else if(m==='student'){document.getElementById('sc-stu').classList.add('active');loadStu();}
+  if(m==='student'){document.getElementById('sc-stu').classList.add('active');loadStu();}
   else document.getElementById('sc-emp').classList.add('active');
 }
-let curStep=0,q2t='',fuRec=null,fuKey='';
-function startNew(){document.getElementById('emp-mode').style.display='none';document.getElementById('emp-new').style.display='block';setStep(0);}
+
+function startNew(){document.getElementById('emp-mode').style.display='none';document.getElementById('emp-info').style.display='block';}
 function startFU(){document.getElementById('emp-mode').style.display='none';document.getElementById('emp-fu').style.display='block';}
-function backMode(){document.getElementById('emp-mode').style.display='block';document.getElementById('emp-fu').style.display='none';document.getElementById('emp-new').style.display='none';}
-function selChip(el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');q2t=el.textContent.replace(/[🙋✅📢]/g,'').trim();}
-function nx(f){
-  if(f===0){const n=document.getElementById('inp-name').value.trim(),t=document.getElementById('inp-team').value.trim(),g=document.getElementById('inp-grade').value,e=document.getElementById('inp-email').value.trim(),p=document.getElementById('inp-pw').value.trim();if(!n||!t||!g||!e||!p){alert('모든 항목을 입력해 주세요.');return;}if(p.length!==4||isNaN(p)){alert('비밀번호는 숫자 4자리로 입력해 주세요.');return;}}
-  if([1,2,3,4].includes(f)&&!document.getElementById('inp-q'+f).value.trim()){alert('내용을 입력해 주세요.');return;}
-  setStep(f+1);
+function backMode(){document.getElementById('emp-mode').style.display='block';document.getElementById('emp-info').style.display='none';document.getElementById('emp-fu').style.display='none';document.getElementById('emp-form').style.display='none';}
+function backToInfo(){document.getElementById('emp-form').style.display='none';document.getElementById('emp-info').style.display='block';}
+
+function goToForm(){
+  const n=document.getElementById('inp-name').value.trim(),t=document.getElementById('inp-team').value.trim(),g=document.getElementById('inp-grade').value,e=document.getElementById('inp-email').value.trim(),p=document.getElementById('inp-pw').value.trim();
+  if(!n||!t||!g||!e||!p){alert('모든 항목을 입력해 주세요.');return;}
+  if(p.length!==4||isNaN(p)){alert('비밀번호는 숫자 4자리로 입력해 주세요.');return;}
+  document.getElementById('emp-info').style.display='none';
+  document.getElementById('emp-form').style.display='block';
+  window.scrollTo(0,0);
 }
-function bk(f){setStep(f-1);}
-function setStep(n){curStep=n;document.querySelectorAll('.step').forEach((s,i)=>s.classList.toggle('active',i===n));document.querySelectorAll('.pd').forEach((d,i)=>{d.classList.remove('done','on');if(i<n)d.classList.add('done');else if(i===n)d.classList.add('on');});}
+
 async function doSubmit(){
-  const q4=document.getElementById('inp-q4').value.trim();if(!q4){alert('내용을 입력해 주세요.');return;}
-  const btn=document.getElementById('btn-sub');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>AI 요약 중...';
+  const q1=document.getElementById('inp-q1').value.trim();
+  const q2=document.getElementById('inp-q2').value.trim();
+  const q3=document.getElementById('inp-q3').value.trim();
+  const q4=document.getElementById('inp-q4').value.trim();
+  const vow=document.getElementById('inp-vow').value.trim();
+  if(!q1){alert('오늘 느낀 점을 입력해 주세요.');return;}
+  if(!vow){alert('나의 다짐을 입력해 주세요.');return;}
+  const btn=document.getElementById('btn-sub');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>제출 중...';
   const name=document.getElementById('inp-name').value.trim(),team=document.getElementById('inp-team').value.trim(),grade=document.getElementById('inp-grade').value,email=document.getElementById('inp-email').value.trim(),pw=document.getElementById('inp-pw').value.trim();
-  const q1=document.getElementById('inp-q1').value.trim(),q2=document.getElementById('inp-q2').value.trim(),q3=document.getElementById('inp-q3').value.trim();
-  let aiSum=q3,aiKw=[];
-  try{const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,messages:[{role:'user',content:`사원·주임·대리급 Action Plan:\n이름:${name}/팀:${team}/직급:${grade}\nQ1:${q1}\nQ2(${q2t||'미선택'}):${q2}\nQ3:${q3}\nQ4:${q4}\n\n아래 형식으로만 응답:\n요약: (2문장이내)\n키워드: k1, k2, k3`}]})});const d=await res.json();const t=d.content.map(c=>c.text||'').join('');const sm=t.match(/요약:\s*(.+?)(?=키워드:|$)/s);const km=t.match(/키워드:\s*(.+)/);if(sm)aiSum=sm[1].trim();if(km)aiKw=km[1].split(',').map(k=>k.trim());}catch{}
+  const scoreTotal=parseInt(document.getElementById('score-total').value);
+  const scoreQ=parseInt(document.getElementById('score-q').value);
+  const scoreC=parseInt(document.getElementById('score-c').value);
+  const scoreS=parseInt(document.getElementById('score-s').value);
+  let aiSum=vow,aiKw=[];
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,messages:[{role:'user',content:`사원·주임·대리급 Action Plan:\n이름:${name}/팀:${team}/직급:${grade}\n오늘 느낀점:${q1}\n질문하기 개선:${q2||'미작성'}\n확인하기 개선:${q3||'미작성'}\n공유하기 개선:${q4||'미작성'}\n나의 다짐:${vow}\n\n아래 형식으로만 응답:\n요약: (2문장이내, 다짐 중심)\n키워드: k1, k2, k3`}]})});
+    const d=await res.json();const t=d.content.map(c=>c.text||'').join('');
+    const sm=t.match(/요약:\s*(.+?)(?=키워드:|$)/s);const km=t.match(/키워드:\s*(.+)/);
+    if(sm)aiSum=sm[1].trim();if(km)aiKw=km[1].split(',').map(k=>k.trim());
+  }catch{}
   const key=emailToKey(email);
-  try{await fbSet('/submissions/'+key,{name,team,grade,email,pw,q1,q2type:q2t,q2,q3,q4,summary:aiSum,keywords:aiKw,time:new Date().toLocaleString('ko-KR'),scores:{}});}catch{alert('저장 중 오류가 발생했습니다.');}
-  document.getElementById('done-sum').textContent=aiSum;btn.disabled=false;btn.innerHTML='AI 요약 후 제출하기';setStep(5);
+  try{
+    await fbSet('/submissions/'+key,{name,team,grade,email,pw,q1,q2,q3,q4,vow,summary:aiSum,keywords:aiKw,time:new Date().toLocaleString('ko-KR'),baseScores:{total:scoreTotal,question:scoreQ,confirm:scoreC,share:scoreS},followups:{}});
+  }catch{alert('저장 중 오류가 발생했습니다.');}
+  btn.disabled=false;btn.innerHTML='제출하기';
+  document.getElementById('emp-form').querySelector('.sec-label').parentElement;
+  const form=document.getElementById('emp-form');
+  Array.from(form.children).forEach(c=>{if(c.id!=='submit-done')c.style.display='none';});
+  document.getElementById('submit-done').style.display='block';
+  window.scrollTo(0,0);
 }
+
 async function lookupFU(){
   const email=document.getElementById('fu-email').value.trim(),pw=document.getElementById('fu-pw').value.trim();
   if(!email||!pw){alert('이메일과 비밀번호를 입력해 주세요.');return;}
   const key=emailToKey(email);
-  try{const data=await fbGet('/submissions/'+key);if(!data||data.pw!==pw){document.getElementById('fu-err').style.display='block';return;}document.getElementById('fu-err').style.display='none';fuRec=data;fuKey=key;document.getElementById('fu-sum').textContent=data.summary||data.q3;document.getElementById('fu-login-step').style.display='none';document.getElementById('fu-score-step').style.display='block';}catch{document.getElementById('fu-err').style.display='block';}
+  try{const data=await fbGet('/submissions/'+key);if(!data||data.pw!==pw){document.getElementById('fu-err').style.display='block';return;}document.getElementById('fu-err').style.display='none';fuRec=data;fuKey=key;document.getElementById('fu-sum').textContent=data.summary||data.vow||'';document.getElementById('fu-login-step').style.display='none';document.getElementById('fu-score-step').style.display='block';}catch{document.getElementById('fu-err').style.display='block';}
 }
+
 function renderCtx(){
   const period=document.getElementById('fu-period').value;if(!period||!fuRec)return;
-  const sp=parseInt(document.getElementById('sp').value),sg=parseInt(document.getElementById('sg').value);
-  const pts=['1m','3m','6m'],ci=pts.indexOf(period),scores=fuRec.scores||{},prev=ci>0?scores[pts[ci-1]]:null;
-  setCtx('p',sp,prev?prev.personal:null,'개인 Action Plan');setCtx('g',sg,prev?prev.group:null,'공동 협업 룰');
+  const sp=parseInt(document.getElementById('fu-total').value);
+  const base=fuRec.baseScores?fuRec.baseScores.total:null;
+  const fu=fuRec.followups||{};const pts=['1m','3m','6m'];const ci=pts.indexOf(period);
+  const prev=ci>0?fu[pts[ci-1]]:null;
+  const prevScore=prev?prev.total:(ci===0?base:null);
+  setCtx('p',sp,prevScore,'전체 소통 점수');
   document.getElementById('ctx-area').style.display='block';
 }
 function setCtx(t,cur,prev,label){
@@ -247,102 +472,117 @@ function setCtx(t,cur,prev,label){
   else if(diff>=2){box.classList.add('up');tag.classList.add('up');tag.textContent=label+' · 상승 +'+diff+'점';ta.placeholder='무엇이 도움이 됐나요?\n예) 내가 한 것 / 상사·회사가 해준 것';}
   else{box.classList.add('dn');tag.classList.add('dn');tag.textContent=label+' · 하락 '+diff+'점';ta.placeholder='실천이 어려웠던 이유는?\n예) 내가 더 필요한 것 / 상사·회사가 해주면 좋을 것';}
 }
+
 async function submitFU(){
   const period=document.getElementById('fu-period').value;if(!period){alert('시점을 선택해 주세요.');return;}
-  const sp=parseInt(document.getElementById('sp').value),sg=parseInt(document.getElementById('sg').value);
-  const ctxP=document.getElementById('ctx-p-ta').value.trim(),ctxG=document.getElementById('ctx-g-ta').value.trim();
-  try{await fbSet('/submissions/'+fuKey+'/scores/'+period,{personal:sp,group:sg,ctxPersonal:ctxP,ctxGroup:ctxG,date:new Date().toLocaleDateString('ko-KR')});document.querySelector('#fu-score-step .btn').style.display='none';document.getElementById('fu-done').style.display='block';}catch{alert('저장 중 오류가 발생했습니다.');}
+  const total=parseInt(document.getElementById('fu-total').value);
+  const q=parseInt(document.getElementById('fu-q').value);
+  const c=parseInt(document.getElementById('fu-c').value);
+  const s=parseInt(document.getElementById('fu-s').value);
+  const ctx=document.getElementById('ctx-p-ta').value.trim();
+  try{
+    await fbSet('/submissions/'+fuKey+'/followups/'+period,{total,question:q,confirm:c,share:s,context:ctx,date:new Date().toLocaleDateString('ko-KR')});
+    document.querySelector('#fu-score-step .btn').style.display='none';document.getElementById('fu-done').style.display='block';
+  }catch{alert('저장 중 오류가 발생했습니다.');}
 }
+
 async function saveRules(){
   const rules=['r1','r2','r3'].map(id=>document.getElementById(id).value.trim()).filter(Boolean);
   if(!rules.length){alert('룰을 최소 1개 입력해 주세요.');return;}
-  try{await fbSet('/rules',rules);document.getElementById('rule-ok').style.display='block';loadAdmin();}catch{alert('저장 중 오류가 발생했습니다.');}
+  try{await fbSet('/rules',rules);document.getElementById('rule-ok').style.display='block';loadStu();}catch{alert('저장 중 오류가 발생했습니다.');}
 }
+
 function buildRadar(canvasId,inst,data,total){
   const labels=['확인하기','질문하기','공유하기'];
-  const vals=labels.map(l=>total>0?Math.round((data[l]||0)/total*100):0);
+  const tc={'확인하기':data.confirm||0,'질문하기':data.question||0,'공유하기':data.share||0};
+  const vals=labels.map(l=>total>0?Math.round((tc[l]||0)/total*100):0);
   if(inst)inst.destroy();
   const ctx=document.getElementById(canvasId).getContext('2d');
-  return new Chart(ctx,{type:'radar',data:{labels,datasets:[{data:vals,backgroundColor:'rgba(29,158,117,0.15)',borderColor:'#1D9E75',borderWidth:2,pointBackgroundColor:['#1D9E75','#EF9F27','#378ADD'],pointBorderColor:['#1D9E75','#EF9F27','#378ADD'],pointRadius:6}]},options:{responsive:true,scales:{r:{min:0,max:60,ticks:{stepSize:20,callback:v=>v+'%',font:{size:11},color:'#9a9a9a',backdropColor:'transparent'},grid:{color:'rgba(0,0,0,0.08)'},angleLines:{color:'rgba(0,0,0,0.08)'},pointLabels:{font:{size:13,weight:'600'},color:['#085041','#633806','#0C447C']}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw}% (${[data['확인하기']||0,data['질문하기']||0,data['공유하기']||0][c.dataIndex]}명)`}}}}});
+  return new Chart(ctx,{type:'radar',data:{labels,datasets:[{data:vals,backgroundColor:'rgba(29,158,117,0.15)',borderColor:'#1D9E75',borderWidth:2,pointBackgroundColor:['#1D9E75','#EF9F27','#378ADD'],pointBorderColor:['#1D9E75','#EF9F27','#378ADD'],pointRadius:6}]},options:{responsive:true,scales:{r:{min:0,max:60,ticks:{stepSize:20,callback:v=>v+'%',font:{size:11},color:'#9a9a9a',backdropColor:'transparent'},grid:{color:'rgba(0,0,0,0.08)'},angleLines:{color:'rgba(0,0,0,0.08)'},pointLabels:{font:{size:13,weight:'600'},color:['#085041','#633806','#0C447C']}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw}% (${[tc['확인하기'],tc['질문하기'],tc['공유하기']][c.dataIndex]}명)`}}}}});
 }
+
 function buildLine(canvasId,inst,subs){
-  const pts=['교육 직후','1개월 후','3개월 후','6개월 후'];
+  const labels=['교육 직후','1개월 후','3개월 후','6개월 후'];
   const keys=[null,'1m','3m','6m'];
-  const pData=keys.map(k=>{if(!k)return null;const sc=subs.filter(s=>s.scores&&s.scores[k]).map(s=>s.scores[k]);if(!sc.length)return null;return+(sc.reduce((a,b)=>a+b.personal,0)/sc.length).toFixed(1);});
-  const gData=keys.map(k=>{if(!k)return null;const sc=subs.filter(s=>s.scores&&s.scores[k]).map(s=>s.scores[k]);if(!sc.length)return null;return+(sc.reduce((a,b)=>a+b.group,0)/sc.length).toFixed(1);});
+  const pData=keys.map(k=>{
+    if(!k)return subs.length?+(subs.reduce((a,s)=>a+(s.baseScores?s.baseScores.total:0),0)/subs.length).toFixed(1):null;
+    const sc=subs.filter(s=>s.followups&&s.followups[k]).map(s=>s.followups[k]);
+    if(!sc.length)return null;return+(sc.reduce((a,b)=>a+b.total,0)/sc.length).toFixed(1);
+  });
   if(inst)inst.destroy();
   const ctx=document.getElementById(canvasId).getContext('2d');
-  return new Chart(ctx,{type:'line',data:{labels:pts,datasets:[{label:'개인 실천',data:pData,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.08)',pointBackgroundColor:'#378ADD',pointRadius:5,tension:0.3,spanGaps:false},{label:'공동 룰',data:gData,borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,0.08)',pointBackgroundColor:'#1D9E75',pointRadius:5,tension:0.3,spanGaps:false}]},options:{responsive:true,scales:{y:{min:0,max:10,ticks:{stepSize:2,font:{size:11}},grid:{color:'rgba(0,0,0,0.06)'}},x:{ticks:{font:{size:11}},grid:{display:false}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.raw}점`}}}}});
+  return new Chart(ctx,{type:'line',data:{labels,datasets:[{label:'전체 소통',data:pData,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.08)',pointBackgroundColor:'#378ADD',pointRadius:5,tension:0.3,spanGaps:false}]},options:{responsive:true,scales:{y:{min:0,max:10,ticks:{stepSize:2,font:{size:11}},grid:{color:'rgba(0,0,0,0.06)'}},x:{ticks:{font:{size:11}},grid:{display:false}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.raw}점`}}}}});
 }
-async function loadAdmin(){
-  document.getElementById('admin-info').textContent='데이터를 불러오는 중...';
+
+async function loadStu(){
+  document.getElementById('dash-info').textContent='데이터를 불러오는 중...';
   try{
     const [subsData,rules]=await Promise.all([fbGet('/submissions'),fbGet('/rules')]);
     const subs=subsData?Object.values(subsData):[];const ruleList=rules||[];
     const teams=new Set(subs.map(s=>s.team));
-    document.getElementById('a-total').textContent=subs.length;document.getElementById('a-teams').textContent=teams.size;
-    document.getElementById('admin-info').textContent=`교육 완료 · ${new Date().toLocaleDateString('ko-KR')} · 참여 ${subs.length}명 · ${teams.size}개 팀`;
-    document.getElementById('a-kw-cnt').textContent=`개인 ${subs.length}건`;document.getElementById('a-rule-cnt').textContent=`직급 공동 ${ruleList.length}개`;
-    const allKw=subs.flatMap(s=>s.keywords||[]);const kwEl=document.getElementById('a-kw');
-    if(allKw.length){const f={};allKw.forEach(k=>f[k]=(f[k]||0)+1);const s=Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,10);kwEl.innerHTML=s.map(([k,n])=>`<span class="kw${n>=3?' lg':''}">${k}${n>1?` <span style="font-size:11px;opacity:.65;">${n}</span>`:''}</span>`).join('');}
+    document.getElementById('d-total').textContent=subs.length;
+    document.getElementById('d-teams').textContent=teams.size;
+    document.getElementById('dash-info').textContent=`교육 완료 · ${new Date().toLocaleDateString('ko-KR')} · 참여 ${subs.length}명 · ${teams.size}개 팀`;
+    document.getElementById('d-kw-cnt').textContent=`개인 ${subs.length}건`;
+    document.getElementById('d-rule-cnt').textContent=`직급 공동 ${ruleList.length}개`;
+
+    const allKw=subs.flatMap(s=>s.keywords||[]);const kwEl=document.getElementById('d-kw');
+    if(allKw.length){const f={};allKw.forEach(k=>f[k]=(f[k]||0)+1);const sorted=Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,10);kwEl.innerHTML=sorted.map(([k,n])=>`<span class="kw${n>=3?' lg':''}">${k}${n>1?` <span style="font-size:11px;opacity:.65;">${n}</span>`:''}</span>`).join('');}
     else kwEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
-    const rEl=document.getElementById('a-rules');
+
+    const rEl=document.getElementById('d-rules');
     if(ruleList.length)rEl.innerHTML=ruleList.map((r,i)=>`<div class="rr"><span class="rn">${i+1}</span><span class="rt">${r}</span></div>`).join('');
     else rEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span>';
-    const tc={'확인하기':0,'질문하기':0,'공유하기':0};subs.forEach(s=>{if(s.q2type&&tc[s.q2type]!==undefined)tc[s.q2type]++;});
+
+    const tc={'확인하기':0,'질문하기':0,'공유하기':0};
+    subs.forEach(s=>{if(s.baseScores){const scores=[['확인하기',s.baseScores.confirm],['질문하기',s.baseScores.question],['공유하기',s.baseScores.share]];const lowest=scores.sort((a,b)=>a[1]-b[1])[0];if(lowest)tc[lowest[0]]++;}});
     const tot=Object.values(tc).reduce((a,b)=>a+b,0);
     radarInst=buildRadar('radarChart',radarInst,tc,tot);
     const pillEl=document.getElementById('radar-pills');
-    if(tot){pillEl.innerHTML=Object.entries(tc).map(([l,c])=>{const pct=Math.round(c/tot*100);const cls={'확인하기':'pill-teal','질문하기':'pill-amber','공유하기':'pill-blue'}[l]||'pill-blue';return`<span class="stat-pill ${cls}">${l} ${pct}% (${c}명)</span>`;}).join('');
+    if(tot){
+      pillEl.innerHTML=Object.entries(tc).map(([l,c])=>{const pct=Math.round(c/tot*100);const cls={'확인하기':'pill-teal','질문하기':'pill-amber','공유하기':'pill-blue'}[l]||'pill-blue';return`<span class="stat-pill ${cls}">${l} ${pct}% (${c}명)</span>`;}).join('');
       const dom=Object.entries(tc).sort((a,b)=>b[1]-a[1])[0][0];
-      const im={'확인하기':['직원 절반이 "확인하기"를 가장 어려워하고 있습니다. 지시 후 확인 없이 진행하는 패턴이 조직 전반에 퍼져 있을 가능성이 높습니다.','관리자가 지시 후 "이해됐어요?"를 먼저 물어보는 것만으로 확인 문화를 빠르게 정착시킬 수 있습니다.','확인 습관이 없으면 방향이 어긋난 결과물이 자주 나옵니다. 업무 시작 전 확인을 팀 루틴으로 만들어 주세요.'],'질문하기':['직원 중 상당수가 "질문하기"를 가장 어려워하고 있습니다. 묻기 어려운 분위기가 있는지 점검이 필요합니다.','관리자가 먼저 "궁금한 거 있어요?"라고 물어보는 것만으로도 심리적 안전감을 높일 수 있습니다.','질문 문화가 없으면 업무 오류와 재작업이 반복됩니다. 질문을 장려하는 환경을 만들어 주세요.'],'공유하기':['직원 중 상당수가 "공유하기"를 가장 어려워하고 있습니다. 정보가 개인 단위에서 멈추는 경우가 많습니다.','공유 기준과 채널을 명확히 정해주는 것이 필요합니다. 언제 무엇을 어디에 공유할지 팀 약속을 만들어 주세요.','완료 후 공유가 아니라 진행 중 공유가 협업 속도를 높입니다. 중간 공유를 장려하는 분위기를 만들어 주세요.']};
-      document.getElementById('a-insight-txt').innerHTML=(im[dom]||[]).map(t=>`<div class="ins-i"><span class="ins-d"></span><span>${t}</span></div>`).join('');
-      document.getElementById('a-insight').style.display='block';
+      const im={'확인하기':['직원 절반이 "확인하기"를 가장 어려워하고 있습니다.','관리자가 지시 후 "이해됐어요?"를 먼저 물어보는 것만으로 확인 문화를 빠르게 정착시킬 수 있습니다.','확인 습관이 없으면 방향이 어긋난 결과물이 자주 나옵니다.'],'질문하기':['직원 중 상당수가 "질문하기"를 가장 어려워하고 있습니다.','관리자가 먼저 "궁금한 거 있어요?"라고 물어보는 것만으로도 심리적 안전감을 높일 수 있습니다.','질문 문화가 없으면 업무 오류와 재작업이 반복됩니다.'],'공유하기':['직원 중 상당수가 "공유하기"를 가장 어려워하고 있습니다.','공유 기준과 채널을 명확히 정해주는 것이 필요합니다.','완료 후 공유가 아니라 진행 중 공유가 협업 속도를 높입니다.']};
+      document.getElementById('d-insight-txt').innerHTML=(im[dom]||[]).map(t=>`<div class="ins-i"><span class="ins-d"></span><span>${t}</span></div>`).join('');
+      document.getElementById('d-insight').style.display='block';
     }else pillEl.innerHTML='';
+
     lineInst=buildLine('lineChart',lineInst,subs);
-    renderFeel('a-feel',subs,true);
-    const tEl=document.getElementById('a-team-area');
-    if(subs.length){const byT={};subs.forEach(s=>{if(!byT[s.team])byT[s.team]=[];byT[s.team].push(s);});const tc2={'질문하기':'sp-q','확인하기':'sp-c','공유하기':'sp-s'};const tb={'질문하기':'tbg-q','확인하기':'tbg-c','공유하기':'tbg-s'};
-      tEl.innerHTML=Object.entries(byT).map(([team,ms])=>{const tf={};ms.forEach(m=>{if(m.q2type)tf[m.q2type]=(tf[m.q2type]||0)+1;});const dt=Object.entries(tf).sort((a,b)=>b[1]-a[1])[0];return`<div class="tb"><div class="th"><span style="font-size:14px;font-weight:600;">${team} <span style="font-size:12px;color:var(--text2);font-weight:400;">${ms.length}명</span></span>${dt?`<span class="tbg ${tb[dt[0]]||'tbg-c'}">${dt[0]} 多</span>`:''}</div>${ms.map(m=>`<div class="mr"><div class="av">${m.name?m.name[0]:'?'}</div><div style="flex:1;min-width:0;"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;"><span style="font-size:13px;font-weight:600;">${m.name}</span><span style="font-size:12px;color:var(--text2);">${m.team} · ${m.grade}</span>${m.q2type?`<span class="sp ${tc2[m.q2type]||'sp-c'}">${m.q2type}</span>`:''}</div><p style="font-size:12px;color:var(--text2);margin-top:2px;line-height:1.5;">${m.summary||m.q3}</p>${m.scores&&Object.keys(m.scores).length?`<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;">${Object.entries(m.scores).map(([p,sc])=>`<span class="sc-p">${{'1m':'1개월','3m':'3개월','6m':'6개월'}[p]||p} ${sc.personal}·${sc.group}</span>`).join('')}</div>`:''}</div></div>`).join('')}</div>`;}).join('');}
+
+    const feelEl=document.getElementById('d-feel');const up=[],dn=[];
+    subs.forEach(s=>{if(!s.followups)return;Object.entries(s.followups).forEach(([period,fu])=>{const suf=` <span style="font-size:11px;color:var(--text3);">· ${s.team} ${s.name}</span>`;const base=s.baseScores?s.baseScores.total:null;const pts=['1m','3m','6m'];const ci=pts.indexOf(period);const prev=ci>0&&s.followups[pts[ci-1]]?s.followups[pts[ci-1]].total:(ci===0?base:null);if(fu.context){const d=prev?fu.total-prev:null;(d===null||d>=0?up:dn).push(`"${fu.context}"${suf}`);}});});
+    if(up.length||dn.length){let h='';if(up.length)h+=`<div style="margin-bottom:12px;"><p style="font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:5px;"><span style="width:7px;height:7px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>점수가 올랐을 때 — 도움이 된 것</p>${up.map(t=>`<div class="fi up">${t}</div>`).join('')}</div>`;if(dn.length)h+=`<div><p style="font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:5px;"><span style="width:7px;height:7px;border-radius:50%;background:#D85A30;display:inline-block;"></span>점수가 내려갔을 때 — 필요한 도움</p>${dn.map(t=>`<div class="fi dn">${t}</div>`).join('')}</div>`;feelEl.innerHTML=h;}
+    else feelEl.innerHTML='<span style="font-size:13px;color:var(--text3);">팔로우업 기록이 쌓이면 표시됩니다</span>';
+
+    const tEl=document.getElementById('d-team-area');
+    if(subs.length){const byT={};subs.forEach(s=>{if(!byT[s.team])byT[s.team]=[];byT[s.team].push(s);});
+      tEl.innerHTML=Object.entries(byT).map(([team,ms])=>`<div class="tb"><div class="th"><span style="font-size:14px;font-weight:600;">${team} <span style="font-size:12px;color:var(--text2);font-weight:400;">${ms.length}명</span></span></div>${ms.map(m=>`<div class="mr"><div class="av">${m.name?m.name[0]:'?'}</div><div style="flex:1;min-width:0;"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;"><span style="font-size:13px;font-weight:600;">${m.name}</span><span style="font-size:12px;color:var(--text2);">${m.grade}</span></div><p style="font-size:12px;color:var(--text2);margin-top:2px;line-height:1.5;">${m.summary||m.vow||''}</p>${m.baseScores?`<div style="display:flex;gap:5px;margin-top:4px;flex-wrap:wrap;"><span class="sc-p">교육 직후 ${m.baseScores.total}점</span>${m.followups?Object.entries(m.followups).map(([p,fu])=>`<span class="sc-p">${{'1m':'1개월','3m':'3개월','6m':'6개월'}[p]||p} ${fu.total}점</span>`).join(''):''}  </div>`:''}</div></div>`).join('')}</div>`).join('');}
     else tEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
-  }catch(e){document.getElementById('admin-info').textContent='데이터 로드 중 오류가 발생했습니다.';}
+  }catch(e){document.getElementById('dash-info').textContent='데이터 로드 중 오류가 발생했습니다.';}
 }
-function renderFeel(id,subs,showName){
-  const el=document.getElementById(id);const up=[],dn=[];
-  subs.forEach(s=>{if(!s.scores)return;const pts=['1m','3m','6m'];Object.entries(s.scores).forEach(([period,sc])=>{const suf=showName?` <span style="font-size:11px;color:var(--text3);">· ${s.team} ${s.name}</span>`:'';const ci=pts.indexOf(period);const prev=ci>0&&s.scores[pts[ci-1]]?s.scores[pts[ci-1]]:null;if(sc.ctxPersonal){const d=prev?sc.personal-prev.personal:null;(d===null||d>=0?up:dn).push(`"${sc.ctxPersonal}"${suf}`);}if(sc.ctxGroup){const d=prev?sc.group-prev.group:null;(d===null||d>=0?up:dn).push(`"${sc.ctxGroup}"${suf}`);}});});
-  if(!up.length&&!dn.length){el.innerHTML='<span style="font-size:13px;color:var(--text3);">팔로우업 기록이 쌓이면 표시됩니다</span>';return;}
-  let h='';
-  if(up.length)h+=`<div style="margin-bottom:12px;"><p style="font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:5px;"><span style="width:7px;height:7px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>점수가 올랐을 때 — 도움이 된 것</p>${up.map(t=>`<div class="fi up">${t}</div>`).join('')}</div>`;
-  if(dn.length)h+=`<div><p style="font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:5px;"><span style="width:7px;height:7px;border-radius:50%;background:#D85A30;display:inline-block;"></span>점수가 내려갔을 때 — 필요한 도움</p>${dn.map(t=>`<div class="fi dn">${t}</div>`).join('')}</div>`;
-  el.innerHTML=h;
-}
-async function loadStu(){
-  try{
-    const [subsData,rules]=await Promise.all([fbGet('/submissions'),fbGet('/rules')]);
-    const subs=subsData?Object.values(subsData):[];const ruleList=rules||[];
-    const allKw=subs.flatMap(s=>s.keywords||[]);const kwEl=document.getElementById('s-kw');
-    if(allKw.length){const f={};allKw.forEach(k=>f[k]=(f[k]||0)+1);const s=Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,10);kwEl.innerHTML=s.map(([k,n])=>`<span class="kw${n>=3?' lg':''}">${k}${n>1?` <span style="font-size:11px;opacity:.65;">${n}</span>`:''}</span>`).join('');}
-    else kwEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 제출된 내용이 없습니다</span>';
-    const rEl=document.getElementById('s-rules');
-    if(ruleList.length)rEl.innerHTML=ruleList.map((r,i)=>`<div class="rr"><span class="rn">${i+1}</span><span class="rt">${r}</span></div>`).join('');
-    else rEl.innerHTML='<span style="font-size:13px;color:var(--text3);">아직 등록된 공동 룰이 없습니다</span>';
-    const tc={'확인하기':0,'질문하기':0,'공유하기':0};subs.forEach(s=>{if(s.q2type&&tc[s.q2type]!==undefined)tc[s.q2type]++;});
-    const tot=Object.values(tc).reduce((a,b)=>a+b,0);
-    radarStuInst=buildRadar('radarChartStu',radarStuInst,tc,tot);
-    const pillEl=document.getElementById('stu-radar-pills');
-    if(tot){const dom=Object.entries(tc).sort((a,b)=>b[1]-a[1])[0][0];pillEl.innerHTML=Object.entries(tc).map(([l,c])=>{const pct=Math.round(c/tot*100);const cls={'확인하기':'pill-teal','질문하기':'pill-amber','공유하기':'pill-blue'}[l]||'pill-blue';return`<span class="stat-pill ${cls}">${l} ${pct}% (${c}명)</span>`;}).join('')+`<p style="font-size:12px;color:var(--text2);margin-top:10px;text-align:center;line-height:1.6;">우리 직급에서 가장 많은 분이 <strong>"${dom}"</strong>을 어려워하고 있어요. 나만 그런 게 아니에요.</p>`;}
-    lineStuInst=buildLine('lineChartStu',lineStuInst,subs);
-    renderFeel('s-feel',subs,false);
-  }catch{}
-}
-function stuTab(id,el){document.querySelectorAll('#sc-stu .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('stu-group').style.display=id==='group'?'block':'none';document.getElementById('stu-my').style.display=id==='my'?'block':'none';}
+
+function stuTab(id,el){document.querySelectorAll('.tab-bar .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('stu-group').style.display=id==='group'?'block':'none';document.getElementById('stu-my').style.display=id==='my'?'block':'none';}
+
 async function stuLookup(){
   const email=document.getElementById('stu-email').value.trim(),pw=document.getElementById('stu-pw').value.trim();
   if(!email||!pw){alert('이메일과 비밀번호를 입력해 주세요.');return;}
   const key=emailToKey(email);
-  try{const data=await fbGet('/submissions/'+key);if(!data||data.pw!==pw){document.getElementById('stu-err').style.display='block';return;}document.getElementById('stu-err').style.display='none';document.getElementById('stu-sum').textContent=data.summary||data.q3||'';document.getElementById('stu-kw').innerHTML=(data.keywords||[]).map(k=>`<span class="kw blue">${k}</span>`).join('');const scores=data.scores||{};const pl={'1m':'1개월 후','3m':'3개월 후','6m':'6개월 후'};const scEl=document.getElementById('stu-scores');if(Object.keys(scores).length)scEl.innerHTML=Object.entries(scores).map(([p,s])=>`<div class="pp"><p style="font-size:13px;font-weight:600;margin-bottom:6px;">${pl[p]||p}</p><div style="display:flex;gap:6px;"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:var(--blue-bg);color:var(--blue-t);">개인 ${s.personal}점</span><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:var(--teal-bg);color:var(--teal-t);">공동 룰 ${s.group}점</span></div></div>`).join('');else scEl.innerHTML='<p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 팔로우업 점수가 없습니다</p>';const ctEl=document.getElementById('stu-ctx');const ci=Object.entries(scores).filter(([,s])=>s.ctxPersonal||s.ctxGroup);if(ci.length)ctEl.innerHTML=ci.map(([p,s])=>`<div class="pp"><p style="font-size:13px;font-weight:600;margin-bottom:6px;">${pl[p]||p}</p>${s.ctxPersonal?`<div style="font-size:12px;background:var(--bg2);padding:8px;border-radius:var(--r);margin-bottom:5px;line-height:1.6;"><span style="font-size:11px;font-weight:600;color:var(--teal-t);display:block;margin-bottom:2px;">개인 Action Plan</span>${s.ctxPersonal}</div>`:''}${s.ctxGroup?`<div style="font-size:12px;background:var(--bg2);padding:8px;border-radius:var(--r);line-height:1.6;"><span style="font-size:11px;font-weight:600;color:var(--teal-t);display:block;margin-bottom:2px;">공동 협업 룰</span>${s.ctxGroup}</div>`:''}</div>`).join('');else ctEl.innerHTML='<p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 기록이 없습니다</p>';document.getElementById('stu-login-step').style.display='none';document.getElementById('stu-result').style.display='block';}catch{document.getElementById('stu-err').style.display='block';}
+  try{
+    const data=await fbGet('/submissions/'+key);if(!data||data.pw!==pw){document.getElementById('stu-err').style.display='block';return;}
+    document.getElementById('stu-err').style.display='none';
+    document.getElementById('stu-sum').textContent=data.summary||data.vow||'';
+    document.getElementById('stu-kw').innerHTML=(data.keywords||[]).map(k=>`<span class="kw blue">${k}</span>`).join('');
+    const scEl=document.getElementById('stu-scores');
+    const rows=[];
+    if(data.baseScores)rows.push(`<div class="pp"><p style="font-size:13px;font-weight:600;margin-bottom:6px;">교육 직후</p><div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:var(--blue-bg);color:var(--blue-t);">전체 ${data.baseScores.total}점</span><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:var(--teal-bg);color:var(--teal-t);">질문 ${data.baseScores.question}점</span><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:#FAEEDA;color:#633806;">확인 ${data.baseScores.confirm}점</span><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:#EEEDFE;color:#3C3489;">공유 ${data.baseScores.share}점</span></div></div>`);
+    if(data.followups&&Object.keys(data.followups).length){const pl={'1m':'1개월 후','3m':'3개월 후','6m':'6개월 후'};Object.entries(data.followups).forEach(([p,fu])=>{rows.push(`<div class="pp"><p style="font-size:13px;font-weight:600;margin-bottom:6px;">${pl[p]||p}</p><div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:var(--blue-bg);color:var(--blue-t);">전체 ${fu.total}점</span><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:var(--teal-bg);color:var(--teal-t);">질문 ${fu.question}점</span><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:#FAEEDA;color:#633806;">확인 ${fu.confirm}점</span><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:#EEEDFE;color:#3C3489;">공유 ${fu.share}점</span></div>${fu.context?`<p style="font-size:12px;color:var(--text2);margin-top:6px;line-height:1.6;">"${fu.context}"</p>`:''}</div>`);});}
+    scEl.innerHTML=rows.length?rows.join(''):'<p style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem;">아직 팔로우업 점수가 없습니다</p>';
+    document.getElementById('stu-login-step').style.display='none';document.getElementById('stu-result').style.display='block';
+  }catch{document.getElementById('stu-err').style.display='block';}
 }
+
 function stuReset(){document.getElementById('stu-email').value='';document.getElementById('stu-pw').value='';document.getElementById('stu-login-step').style.display='block';document.getElementById('stu-result').style.display='none';}
+
 window.onload=initScreen;
 </script>
 </body>
